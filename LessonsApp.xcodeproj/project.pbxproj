@@ -8,11 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		DF24C66929AD1A3900F2ADBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C66829AD1A3900F2ADBA /* AppDelegate.swift */; };
-		DF24C66D29AD1A3900F2ADBA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C66C29AD1A3900F2ADBA /* ViewController.swift */; };
 		DF24C67229AD1A3900F2ADBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF24C67129AD1A3900F2ADBA /* Assets.xcassets */; };
 		DF24C68029AD1A3A00F2ADBA /* LessonsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C67F29AD1A3A00F2ADBA /* LessonsAppTests.swift */; };
 		DF24C68A29AD1A3A00F2ADBA /* LessonsAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C68929AD1A3A00F2ADBA /* LessonsAppUITests.swift */; };
 		DF24C68C29AD1A3A00F2ADBA /* LessonsAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C68B29AD1A3A00F2ADBA /* LessonsAppUITestsLaunchTests.swift */; };
+		DF24C69D29AD253600F2ADBA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C69C29AD253600F2ADBA /* Coordinator.swift */; };
+		DF24C6A029AD260B00F2ADBA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C69F29AD260B00F2ADBA /* UIApplication.swift */; };
+		DF24C6A229AD268000F2ADBA /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6A129AD268000F2ADBA /* UIViewController.swift */; };
+		DF24C6A529AD286E00F2ADBA /* AppSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6A429AD286E00F2ADBA /* AppSetup.swift */; };
+		DF24C6A829AD28C100F2ADBA /* ServiceRegistryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6A729AD28C100F2ADBA /* ServiceRegistryProtocol.swift */; };
+		DF24C6AB29AD2A1800F2ADBA /* MainRouterModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6AA29AD2A1800F2ADBA /* MainRouterModule.swift */; };
+		DF24C6AD29AD2A3300F2ADBA /* MainRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6AC29AD2A3300F2ADBA /* MainRoutable.swift */; };
+		DF24C6B129AD2B1D00F2ADBA /* GlobalModuleContaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6B029AD2B1D00F2ADBA /* GlobalModuleContaining.swift */; };
+		DF24C6B329AD339500F2ADBA /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6B229AD339500F2ADBA /* ServiceFactory.swift */; };
+		DF24C6B629AD34F700F2ADBA /* NetworkServicesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6B529AD34F700F2ADBA /* NetworkServicesModule.swift */; };
+		DF24C6B929AD356A00F2ADBA /* PersistenceServicesModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6B829AD356A00F2ADBA /* PersistenceServicesModule.swift */; };
+		DF24C6C029AD3B7D00F2ADBA /* ListingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6BF29AD3B7D00F2ADBA /* ListingView.swift */; };
+		DF24C6C329AD3E6100F2ADBA /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6C229AD3E6100F2ADBA /* WebService.swift */; };
+		DF24C6C529AD3EDD00F2ADBA /* HTTPHeadersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6C429AD3EDD00F2ADBA /* HTTPHeadersProvider.swift */; };
+		DF24C6C729AD3F2800F2ADBA /* WebServiceConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6C629AD3F2800F2ADBA /* WebServiceConfigurable.swift */; };
+		DF24C6C929AD3FF500F2ADBA /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6C829AD3FF500F2ADBA /* URLRequest.swift */; };
+		DF24C6CB29AD412300F2ADBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6CA29AD412300F2ADBA /* NetworkError.swift */; };
+		DF24C6CD29AD41B500F2ADBA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6CC29AD41B500F2ADBA /* Data.swift */; };
+		DF24C6D029AD543200F2ADBA /* ImagePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6CF29AD543200F2ADBA /* ImagePresentable.swift */; };
+		DF24C6D429AD54FF00F2ADBA /* ImageInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6D329AD54FF00F2ADBA /* ImageInteractable.swift */; };
+		DF24C6D729AD55D000F2ADBA /* ImageRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6D629AD55D000F2ADBA /* ImageRepositoryProtocol.swift */; };
+		DF24C6DC29AD56D400F2ADBA /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6DB29AD56D400F2ADBA /* ImageRepository.swift */; };
+		DF24C6E029AD577900F2ADBA /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6DF29AD577900F2ADBA /* ImageService.swift */; };
+		DF24C6E229AD582800F2ADBA /* SUIImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E129AD582800F2ADBA /* SUIImagePresenter.swift */; };
+		DF24C6E429AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E329AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift */; };
+		DF24C6E929AD61D600F2ADBA /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E829AD61D600F2ADBA /* URLImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +60,6 @@
 /* Begin PBXFileReference section */
 		DF24C66529AD1A3900F2ADBA /* LessonsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LessonsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF24C66829AD1A3900F2ADBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DF24C66C29AD1A3900F2ADBA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DF24C67129AD1A3900F2ADBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF24C67629AD1A3900F2ADBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF24C67B29AD1A3A00F2ADBA /* LessonsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +67,32 @@
 		DF24C68529AD1A3A00F2ADBA /* LessonsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF24C68929AD1A3A00F2ADBA /* LessonsAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAppUITests.swift; sourceTree = "<group>"; };
 		DF24C68B29AD1A3A00F2ADBA /* LessonsAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DF24C69C29AD253600F2ADBA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		DF24C69F29AD260B00F2ADBA /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		DF24C6A129AD268000F2ADBA /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		DF24C6A429AD286E00F2ADBA /* AppSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSetup.swift; sourceTree = "<group>"; };
+		DF24C6A729AD28C100F2ADBA /* ServiceRegistryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRegistryProtocol.swift; sourceTree = "<group>"; };
+		DF24C6AA29AD2A1800F2ADBA /* MainRouterModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterModule.swift; sourceTree = "<group>"; };
+		DF24C6AC29AD2A3300F2ADBA /* MainRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRoutable.swift; sourceTree = "<group>"; };
+		DF24C6B029AD2B1D00F2ADBA /* GlobalModuleContaining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalModuleContaining.swift; sourceTree = "<group>"; };
+		DF24C6B229AD339500F2ADBA /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
+		DF24C6B529AD34F700F2ADBA /* NetworkServicesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesModule.swift; sourceTree = "<group>"; };
+		DF24C6B829AD356A00F2ADBA /* PersistenceServicesModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceServicesModule.swift; sourceTree = "<group>"; };
+		DF24C6BF29AD3B7D00F2ADBA /* ListingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingView.swift; sourceTree = "<group>"; };
+		DF24C6C229AD3E6100F2ADBA /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		DF24C6C429AD3EDD00F2ADBA /* HTTPHeadersProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeadersProvider.swift; sourceTree = "<group>"; };
+		DF24C6C629AD3F2800F2ADBA /* WebServiceConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceConfigurable.swift; sourceTree = "<group>"; };
+		DF24C6C829AD3FF500F2ADBA /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		DF24C6CA29AD412300F2ADBA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF24C6CC29AD41B500F2ADBA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		DF24C6CF29AD543200F2ADBA /* ImagePresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePresentable.swift; sourceTree = "<group>"; };
+		DF24C6D329AD54FF00F2ADBA /* ImageInteractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInteractable.swift; sourceTree = "<group>"; };
+		DF24C6D629AD55D000F2ADBA /* ImageRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryProtocol.swift; sourceTree = "<group>"; };
+		DF24C6DB29AD56D400F2ADBA /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
+		DF24C6DF29AD577900F2ADBA /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		DF24C6E129AD582800F2ADBA /* SUIImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePresenter.swift; sourceTree = "<group>"; };
+		DF24C6E329AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointResourcesProtocol.swift; sourceTree = "<group>"; };
+		DF24C6E829AD61D600F2ADBA /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +143,12 @@
 		DF24C66729AD1A3900F2ADBA /* LessonsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DF24C69A29AD252600F2ADBA /* Core */,
+				DF24C6D829AD569700F2ADBA /* Data */,
+				DF24C6D129AD54EB00F2ADBA /* Domain */,
+				DF24C6AE29AD2AA400F2ADBA /* Routing */,
+				DF24C6BD29AD3B5600F2ADBA /* Presentation */,
 				DF24C66829AD1A3900F2ADBA /* AppDelegate.swift */,
-				DF24C66C29AD1A3900F2ADBA /* ViewController.swift */,
 				DF24C67129AD1A3900F2ADBA /* Assets.xcassets */,
 				DF24C67629AD1A3900F2ADBA /* Info.plist */,
 			);
@@ -116,6 +170,211 @@
 				DF24C68B29AD1A3A00F2ADBA /* LessonsAppUITestsLaunchTests.swift */,
 			);
 			path = LessonsAppUITests;
+			sourceTree = "<group>";
+		};
+		DF24C69A29AD252600F2ADBA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6A329AD285D00F2ADBA /* AppCore */,
+				DF24C6EA29AD645300F2ADBA /* UI */,
+				DF24C6AF29AD2B0900F2ADBA /* Routing */,
+				DF24C69E29AD25EA00F2ADBA /* Extensions */,
+				DF24C6C129AD3E4B00F2ADBA /* Networking */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		DF24C69E29AD25EA00F2ADBA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C69F29AD260B00F2ADBA /* UIApplication.swift */,
+				DF24C6A129AD268000F2ADBA /* UIViewController.swift */,
+				DF24C6CC29AD41B500F2ADBA /* Data.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF24C6A329AD285D00F2ADBA /* AppCore */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6A629AD28A600F2ADBA /* DI */,
+				DF24C6A429AD286E00F2ADBA /* AppSetup.swift */,
+			);
+			path = AppCore;
+			sourceTree = "<group>";
+		};
+		DF24C6A629AD28A600F2ADBA /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6B729AD352C00F2ADBA /* PersistenceAssemble */,
+				DF24C6B429AD34E100F2ADBA /* NetworkAssemble */,
+				DF24C6A729AD28C100F2ADBA /* ServiceRegistryProtocol.swift */,
+				DF24C6B229AD339500F2ADBA /* ServiceFactory.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		DF24C6A929AD29FB00F2ADBA /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6AA29AD2A1800F2ADBA /* MainRouterModule.swift */,
+				DF24C6AC29AD2A3300F2ADBA /* MainRoutable.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DF24C6AE29AD2AA400F2ADBA /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6A929AD29FB00F2ADBA /* Main */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		DF24C6AF29AD2B0900F2ADBA /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C69C29AD253600F2ADBA /* Coordinator.swift */,
+				DF24C6B029AD2B1D00F2ADBA /* GlobalModuleContaining.swift */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		DF24C6B429AD34E100F2ADBA /* NetworkAssemble */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6B529AD34F700F2ADBA /* NetworkServicesModule.swift */,
+			);
+			path = NetworkAssemble;
+			sourceTree = "<group>";
+		};
+		DF24C6B729AD352C00F2ADBA /* PersistenceAssemble */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6B829AD356A00F2ADBA /* PersistenceServicesModule.swift */,
+			);
+			path = PersistenceAssemble;
+			sourceTree = "<group>";
+		};
+		DF24C6BD29AD3B5600F2ADBA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6CE29AD542600F2ADBA /* Common */,
+				DF24C6BE29AD3B6F00F2ADBA /* Listing */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		DF24C6BE29AD3B6F00F2ADBA /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6BF29AD3B7D00F2ADBA /* ListingView.swift */,
+			);
+			path = Listing;
+			sourceTree = "<group>";
+		};
+		DF24C6C129AD3E4B00F2ADBA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6C229AD3E6100F2ADBA /* WebService.swift */,
+				DF24C6C429AD3EDD00F2ADBA /* HTTPHeadersProvider.swift */,
+				DF24C6C629AD3F2800F2ADBA /* WebServiceConfigurable.swift */,
+				DF24C6C829AD3FF500F2ADBA /* URLRequest.swift */,
+				DF24C6CA29AD412300F2ADBA /* NetworkError.swift */,
+				DF24C6E329AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		DF24C6CE29AD542600F2ADBA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6CF29AD543200F2ADBA /* ImagePresentable.swift */,
+				DF24C6E129AD582800F2ADBA /* SUIImagePresenter.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DF24C6D129AD54EB00F2ADBA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6D229AD54F000F2ADBA /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		DF24C6D229AD54F000F2ADBA /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6D529AD55B900F2ADBA /* Images */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		DF24C6D529AD55B900F2ADBA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6D329AD54FF00F2ADBA /* ImageInteractable.swift */,
+				DF24C6D629AD55D000F2ADBA /* ImageRepositoryProtocol.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		DF24C6D829AD569700F2ADBA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6DD29AD576100F2ADBA /* Providers */,
+				DF24C6D929AD569F00F2ADBA /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DF24C6D929AD569F00F2ADBA /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6DB29AD56D400F2ADBA /* ImageRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		DF24C6DD29AD576100F2ADBA /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6DE29AD576800F2ADBA /* Remote */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		DF24C6DE29AD576800F2ADBA /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6E529AD5D9600F2ADBA /* Images */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		DF24C6E529AD5D9600F2ADBA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6DF29AD577900F2ADBA /* ImageService.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		DF24C6EA29AD645300F2ADBA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6EB29AD645F00F2ADBA /* Views */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		DF24C6EB29AD645F00F2ADBA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6E829AD61D600F2ADBA /* URLImage.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,8 +506,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF24C66D29AD1A3900F2ADBA /* ViewController.swift in Sources */,
+				DF24C6C529AD3EDD00F2ADBA /* HTTPHeadersProvider.swift in Sources */,
+				DF24C6A029AD260B00F2ADBA /* UIApplication.swift in Sources */,
+				DF24C6B129AD2B1D00F2ADBA /* GlobalModuleContaining.swift in Sources */,
+				DF24C6C329AD3E6100F2ADBA /* WebService.swift in Sources */,
 				DF24C66929AD1A3900F2ADBA /* AppDelegate.swift in Sources */,
+				DF24C6C029AD3B7D00F2ADBA /* ListingView.swift in Sources */,
+				DF24C6B329AD339500F2ADBA /* ServiceFactory.swift in Sources */,
+				DF24C6C729AD3F2800F2ADBA /* WebServiceConfigurable.swift in Sources */,
+				DF24C6B929AD356A00F2ADBA /* PersistenceServicesModule.swift in Sources */,
+				DF24C6D029AD543200F2ADBA /* ImagePresentable.swift in Sources */,
+				DF24C6E929AD61D600F2ADBA /* URLImage.swift in Sources */,
+				DF24C6E229AD582800F2ADBA /* SUIImagePresenter.swift in Sources */,
+				DF24C69D29AD253600F2ADBA /* Coordinator.swift in Sources */,
+				DF24C6A229AD268000F2ADBA /* UIViewController.swift in Sources */,
+				DF24C6AB29AD2A1800F2ADBA /* MainRouterModule.swift in Sources */,
+				DF24C6D729AD55D000F2ADBA /* ImageRepositoryProtocol.swift in Sources */,
+				DF24C6A529AD286E00F2ADBA /* AppSetup.swift in Sources */,
+				DF24C6AD29AD2A3300F2ADBA /* MainRoutable.swift in Sources */,
+				DF24C6E429AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift in Sources */,
+				DF24C6D429AD54FF00F2ADBA /* ImageInteractable.swift in Sources */,
+				DF24C6E029AD577900F2ADBA /* ImageService.swift in Sources */,
+				DF24C6B629AD34F700F2ADBA /* NetworkServicesModule.swift in Sources */,
+				DF24C6DC29AD56D400F2ADBA /* ImageRepository.swift in Sources */,
+				DF24C6CB29AD412300F2ADBA /* NetworkError.swift in Sources */,
+				DF24C6CD29AD41B500F2ADBA /* Data.swift in Sources */,
+				DF24C6C929AD3FF500F2ADBA /* URLRequest.swift in Sources */,
+				DF24C6A829AD28C100F2ADBA /* ServiceRegistryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
