@@ -38,6 +38,15 @@
 		DF24C6E229AD582800F2ADBA /* SUIImagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E129AD582800F2ADBA /* SUIImagePresenter.swift */; };
 		DF24C6E429AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E329AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift */; };
 		DF24C6E929AD61D600F2ADBA /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6E829AD61D600F2ADBA /* URLImage.swift */; };
+		DF24C6ED29AD68A000F2ADBA /* ListingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6EC29AD68A000F2ADBA /* ListingPresenter.swift */; };
+		DF24C6F029AD6ADC00F2ADBA /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6EF29AD6ADC00F2ADBA /* LessonModel.swift */; };
+		DF24C6F229AD6B0B00F2ADBA /* ModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6F129AD6B0B00F2ADBA /* ModelProtocol.swift */; };
+		DF24C6F529AD875800F2ADBA /* LessonInteractable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6F429AD875800F2ADBA /* LessonInteractable.swift */; };
+		DF24C6F729AD87C700F2ADBA /* LessonRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6F629AD87C700F2ADBA /* LessonRepositoryProtocol.swift */; };
+		DF24C6F929AD8A9A00F2ADBA /* LessonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6F829AD8A9A00F2ADBA /* LessonRepository.swift */; };
+		DF24C6FB29AD8B1400F2ADBA /* LessonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6FA29AD8B1400F2ADBA /* LessonService.swift */; };
+		DF24C6FE29AD8FCF00F2ADBA /* LessonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6FD29AD8FCF00F2ADBA /* LessonResponse.swift */; };
+		DF24C70029AD92FD00F2ADBA /* ApplicationConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF24C6FF29AD92FD00F2ADBA /* ApplicationConfigurable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +102,15 @@
 		DF24C6E129AD582800F2ADBA /* SUIImagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIImagePresenter.swift; sourceTree = "<group>"; };
 		DF24C6E329AD5D6200F2ADBA /* APIEndpointResourcesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointResourcesProtocol.swift; sourceTree = "<group>"; };
 		DF24C6E829AD61D600F2ADBA /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
+		DF24C6EC29AD68A000F2ADBA /* ListingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingPresenter.swift; sourceTree = "<group>"; };
+		DF24C6EF29AD6ADC00F2ADBA /* LessonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
+		DF24C6F129AD6B0B00F2ADBA /* ModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProtocol.swift; sourceTree = "<group>"; };
+		DF24C6F429AD875800F2ADBA /* LessonInteractable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonInteractable.swift; sourceTree = "<group>"; };
+		DF24C6F629AD87C700F2ADBA /* LessonRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRepositoryProtocol.swift; sourceTree = "<group>"; };
+		DF24C6F829AD8A9A00F2ADBA /* LessonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonRepository.swift; sourceTree = "<group>"; };
+		DF24C6FA29AD8B1400F2ADBA /* LessonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonService.swift; sourceTree = "<group>"; };
+		DF24C6FD29AD8FCF00F2ADBA /* LessonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResponse.swift; sourceTree = "<group>"; };
+		DF24C6FF29AD92FD00F2ADBA /* ApplicationConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfigurable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +217,7 @@
 			children = (
 				DF24C6A629AD28A600F2ADBA /* DI */,
 				DF24C6A429AD286E00F2ADBA /* AppSetup.swift */,
+				DF24C6FF29AD92FD00F2ADBA /* ApplicationConfigurable.swift */,
 			);
 			path = AppCore;
 			sourceTree = "<group>";
@@ -269,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				DF24C6BF29AD3B7D00F2ADBA /* ListingView.swift */,
+				DF24C6EC29AD68A000F2ADBA /* ListingPresenter.swift */,
 			);
 			path = Listing;
 			sourceTree = "<group>";
@@ -298,6 +318,7 @@
 		DF24C6D129AD54EB00F2ADBA /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF24C6EE29AD6AC900F2ADBA /* Models */,
 				DF24C6D229AD54F000F2ADBA /* UseCases */,
 			);
 			path = Domain;
@@ -306,6 +327,7 @@
 		DF24C6D229AD54F000F2ADBA /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				DF24C6F329AD873B00F2ADBA /* Lessons */,
 				DF24C6D529AD55B900F2ADBA /* Images */,
 			);
 			path = UseCases;
@@ -333,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				DF24C6DB29AD56D400F2ADBA /* ImageRepository.swift */,
+				DF24C6F829AD8A9A00F2ADBA /* LessonRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -348,17 +371,11 @@
 		DF24C6DE29AD576800F2ADBA /* Remote */ = {
 			isa = PBXGroup;
 			children = (
-				DF24C6E529AD5D9600F2ADBA /* Images */,
+				DF24C6FC29AD8FB300F2ADBA /* Model */,
+				DF24C6DF29AD577900F2ADBA /* ImageService.swift */,
+				DF24C6FA29AD8B1400F2ADBA /* LessonService.swift */,
 			);
 			path = Remote;
-			sourceTree = "<group>";
-		};
-		DF24C6E529AD5D9600F2ADBA /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				DF24C6DF29AD577900F2ADBA /* ImageService.swift */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		DF24C6EA29AD645300F2ADBA /* UI */ = {
@@ -375,6 +392,32 @@
 				DF24C6E829AD61D600F2ADBA /* URLImage.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DF24C6EE29AD6AC900F2ADBA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6F129AD6B0B00F2ADBA /* ModelProtocol.swift */,
+				DF24C6EF29AD6ADC00F2ADBA /* LessonModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DF24C6F329AD873B00F2ADBA /* Lessons */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6F429AD875800F2ADBA /* LessonInteractable.swift */,
+				DF24C6F629AD87C700F2ADBA /* LessonRepositoryProtocol.swift */,
+			);
+			path = Lessons;
+			sourceTree = "<group>";
+		};
+		DF24C6FC29AD8FB300F2ADBA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DF24C6FD29AD8FCF00F2ADBA /* LessonResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,19 +549,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF24C6F929AD8A9A00F2ADBA /* LessonRepository.swift in Sources */,
 				DF24C6C529AD3EDD00F2ADBA /* HTTPHeadersProvider.swift in Sources */,
 				DF24C6A029AD260B00F2ADBA /* UIApplication.swift in Sources */,
 				DF24C6B129AD2B1D00F2ADBA /* GlobalModuleContaining.swift in Sources */,
 				DF24C6C329AD3E6100F2ADBA /* WebService.swift in Sources */,
 				DF24C66929AD1A3900F2ADBA /* AppDelegate.swift in Sources */,
 				DF24C6C029AD3B7D00F2ADBA /* ListingView.swift in Sources */,
+				DF24C6FE29AD8FCF00F2ADBA /* LessonResponse.swift in Sources */,
 				DF24C6B329AD339500F2ADBA /* ServiceFactory.swift in Sources */,
+				DF24C6F229AD6B0B00F2ADBA /* ModelProtocol.swift in Sources */,
+				DF24C6ED29AD68A000F2ADBA /* ListingPresenter.swift in Sources */,
 				DF24C6C729AD3F2800F2ADBA /* WebServiceConfigurable.swift in Sources */,
 				DF24C6B929AD356A00F2ADBA /* PersistenceServicesModule.swift in Sources */,
 				DF24C6D029AD543200F2ADBA /* ImagePresentable.swift in Sources */,
+				DF24C6F529AD875800F2ADBA /* LessonInteractable.swift in Sources */,
 				DF24C6E929AD61D600F2ADBA /* URLImage.swift in Sources */,
 				DF24C6E229AD582800F2ADBA /* SUIImagePresenter.swift in Sources */,
+				DF24C70029AD92FD00F2ADBA /* ApplicationConfigurable.swift in Sources */,
 				DF24C69D29AD253600F2ADBA /* Coordinator.swift in Sources */,
+				DF24C6FB29AD8B1400F2ADBA /* LessonService.swift in Sources */,
 				DF24C6A229AD268000F2ADBA /* UIViewController.swift in Sources */,
 				DF24C6AB29AD2A1800F2ADBA /* MainRouterModule.swift in Sources */,
 				DF24C6D729AD55D000F2ADBA /* ImageRepositoryProtocol.swift in Sources */,
@@ -529,10 +579,12 @@
 				DF24C6E029AD577900F2ADBA /* ImageService.swift in Sources */,
 				DF24C6B629AD34F700F2ADBA /* NetworkServicesModule.swift in Sources */,
 				DF24C6DC29AD56D400F2ADBA /* ImageRepository.swift in Sources */,
+				DF24C6F029AD6ADC00F2ADBA /* LessonModel.swift in Sources */,
 				DF24C6CB29AD412300F2ADBA /* NetworkError.swift in Sources */,
 				DF24C6CD29AD41B500F2ADBA /* Data.swift in Sources */,
 				DF24C6C929AD3FF500F2ADBA /* URLRequest.swift in Sources */,
 				DF24C6A829AD28C100F2ADBA /* ServiceRegistryProtocol.swift in Sources */,
+				DF24C6F729AD87C700F2ADBA /* LessonRepositoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

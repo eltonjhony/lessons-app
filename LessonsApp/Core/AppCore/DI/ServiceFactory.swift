@@ -9,6 +9,7 @@ import Foundation
 
 public protocol NetworkServicesModuleProtocol {
     var imageService: ImageServiceProtocol { get }
+    var lessonService: LessonServiceProtocol { get }
 }
 
 public protocol PersistenceModuleProtocol {
@@ -24,10 +25,17 @@ public struct ServicesFactory: ServicesFactoryProtocol {
     public let networkServices: NetworkServicesModuleProtocol
     public let persistenceServices: PersistenceModuleProtocol
 
-    private let webService: WebService = .init(configuration: WebServiceConfigurator())
+    private let applicationConfigurable: ApplicationConfigurable
 
-    public init() {
-        networkServices = NetworkServicesModule(webService: webService)
+    public init(applicationConfigurable: ApplicationConfigurable) {
+        self.applicationConfigurable = applicationConfigurable
+
+        let webService = WebService(
+            configuration: applicationConfigurable.webServiceConfigurable
+        )
+        let apiEndpointResources = applicationConfigurable.endpointResources
+
+        networkServices = NetworkServicesModule(webService: webService, apiEndpointResource: apiEndpointResources)
         persistenceServices = PersistenceServicesModule()
     }
 }

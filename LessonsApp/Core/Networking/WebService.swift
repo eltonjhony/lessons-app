@@ -33,7 +33,6 @@ public class WebService: WebServiceProtocol, HTTPHeadersDecoratorProtocol {
     private var keyDecodingStrategies: [String: JSONDecoder.KeyDecodingStrategy] = [:]
 
     public convenience init(configuration: WebServiceConfigurable, httpHeadersProviders: [HTTPHeadersProvider] = []) {
-        var httpHeadersProviders = httpHeadersProviders
         self.init(urlSession: configuration.urlSession, httpHeadersProviders: httpHeadersProviders)
     }
 

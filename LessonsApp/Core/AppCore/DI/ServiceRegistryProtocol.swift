@@ -9,11 +9,13 @@ import Foundation
 
 public protocol ServiceRegistryProtocol {
     var imageRepository: ImageRepositoryProtocol { get }
+    var lessonRepository: LessonRepositoryProtocol { get }
 }
 
 public class ServiceRegistry: ServiceRegistryProtocol {
 
     public var imageRepository: ImageRepositoryProtocol
+    public var lessonRepository: LessonRepositoryProtocol
 
     private let servicesFactory: ServicesFactoryProtocol
 
@@ -22,6 +24,10 @@ public class ServiceRegistry: ServiceRegistryProtocol {
 
         imageRepository = ImageRepository(
             service: servicesFactory.networkServices.imageService
+        )
+
+        lessonRepository = LessonRepository(
+            service: servicesFactory.networkServices.lessonService
         )
     }
 }

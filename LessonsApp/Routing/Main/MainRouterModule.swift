@@ -23,7 +23,12 @@ public final class MainRouterModule {
             imageRepository: globalModule.services.imageRepository
         )
 
-        let mainView = ListingView()
+        let lessonInteractor = LessonInteractor(
+            lessonRepository: globalModule.services.lessonRepository
+        )
+
+        let presenter = ListingPresenter(interactor: lessonInteractor)
+        let mainView = ListingView(presenter: presenter)
         return AppHostingController(
             rootView: mainView,
             imagePresenter: ImagePresenter(imageInteractor: imageInteractor)

@@ -16,7 +16,8 @@ final class AppSetup {
     private let applicationRouter: MainRoutable
 
     public init() {
-        let servicesFactory = ServicesFactory()
+        let applicationConfiguration = AppConfiguration()
+        let servicesFactory = ServicesFactory(applicationConfigurable: applicationConfiguration)
         serviceRegistry = ServiceRegistry(servicesFactory: servicesFactory)
 
         let globalModule = GlobalFeatureModule(services: serviceRegistry)
