@@ -64,3 +64,13 @@ public final class VideoPlayerController: AVPlayerViewController {
     }
 
 }
+
+extension AVPlayerViewController {
+    func goFullScreen() {
+        let selectorName = "enterFullScreenAnimated:completionHandler:"
+        let selectorToForceFullScreenMode = NSSelectorFromString(selectorName)
+        if self.responds(to: selectorToForceFullScreenMode) {
+            self.perform(selectorToForceFullScreenMode, with: true, with: nil)
+        }
+    }
+}

@@ -17,9 +17,11 @@ public final class DetailsRouterModule {
     }
 
     public func createViewController() -> UIViewController {
+        let imageInteractor = ImageInteractor(imageRepository: globalModule.services.imageRepository)
+        let imagePresenter = ImagePresenter(imageInteractor: imageInteractor)
         let presenter = DetailsPresenter()
         return SUIViewController(
-            view: DetailsView(presenter: presenter),
+            view: DetailsView(presenter: presenter, imagePresenter: imagePresenter),
             presenter: presenter,
             supportedOrientations: [.portrait, .landscape]
         )

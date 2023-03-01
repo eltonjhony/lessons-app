@@ -24,6 +24,6 @@ public final class DetailsPresenter: DetailsPresentable {
     }
 
     public func viewDidAppear() {
-        dataSubject.send(.init(videoURL: "https://embed-ssl.wistia.com/deliveries/cc8402e8c16cc8f36d3f63bd29eb82f99f4b5f88/accudvh5jy.mp4"))
+        dataSubject.send(.init(videoURL: "https://embed-ssl.wistia.com/deliveries/cc8402e8c16cc8f36d3f63bd29eb82f99f4b5f88/accudvh5jy.mp4", thumbnailURL: "https://embed-ssl.wistia.com/deliveries/b57817b5b05c3e3129b7071eee83ecb7.jpg?image_crop_resized=1000x560"))
     }
 }
