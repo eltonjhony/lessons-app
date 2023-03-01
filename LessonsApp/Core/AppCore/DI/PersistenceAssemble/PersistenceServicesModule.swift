@@ -9,8 +9,14 @@ import Foundation
 
 public struct PersistenceServicesModule: PersistenceModuleProtocol {
 
-    public init() {
+    private let dbConfigurable: DBManagerProtocol
 
+    public var lessonStorage: LessonLocalStorable
+
+    public init(dbConfigurable: DBManagerProtocol) {
+        self.dbConfigurable = dbConfigurable
+
+        lessonStorage = LessonLocalStorage(dbManager: dbConfigurable)
     }
 
 }

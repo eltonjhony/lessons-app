@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-final class AppSetup {
+final class AppSetup: NSObject {
 
     private let serviceRegistry: ServiceRegistryProtocol
 
     private let mainApplicationRouterModule: MainRouterModule
     private let applicationRouter: MainRoutable
 
-    public init() {
+    public override init() {
         let applicationConfiguration = AppConfiguration()
         let servicesFactory = ServicesFactory(applicationConfigurable: applicationConfiguration)
         serviceRegistry = ServiceRegistry(servicesFactory: servicesFactory)
@@ -23,9 +23,22 @@ final class AppSetup {
         let globalModule = GlobalFeatureModule(services: serviceRegistry)
         mainApplicationRouterModule = MainRouterModule(globalModule: globalModule)
         applicationRouter = MainApplicationRouter(mainApplicationRouterModule: mainApplicationRouterModule)
+
+        let navigationController = UINavigationController()
+        applicationRouter.rootViewController = navigationController
+        super.init()
+        navigationController.delegate = self
     }
 
     public func bootApp(window: UIWindow) {
         applicationRouter.start(window: window)
     }
+}
+
+extension AppSetup: UINavigationControllerDelegate {
+
+    func navigationControllerSupportedInterfaceOrientations(_ navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+        navigationController.topViewController?.supportedInterfaceOrientations ?? .portrait
+    }
+
 }

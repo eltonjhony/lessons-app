@@ -8,24 +8,38 @@
 import Foundation
 import Combine
 
-public protocol ListingPresentable: ObservableObject {
+public protocol ListingPresentable: SUIPresentable {
     var lessons: [LessonModel] { get }
-    func fetchLessons()
+    func detailsTapped()
 }
 
 public final class ListingPresenter: ListingPresentable {
+
+    public var navigationBar: SUIPresentableNavigationBar? = .init(
+        title: "Lessons",
+        largeTitle: true
+    )
+
     @Published public var lessons: [LessonModel] = []
 
     private let interactor: LessonInteractable
+    private weak var router: MainRoutable?
 
     private var cancellables = [AnyCancellable]()
 
-    public init(interactor: LessonInteractable) {
+    public init(interactor: LessonInteractable, router: MainRoutable) {
         self.interactor = interactor
-        interactor.lessons.assign(to: \.lessons, on: self).store(in: &cancellables)
+        self.router = router
+        interactor.lessons
+            .assign(to: \.lessons, on: self)
+            .store(in: &cancellables)
     }
 
-    public func fetchLessons() {
+    public func viewDidAppear() {
         interactor.fetchLessons()
+    }
+
+    public func detailsTapped() {
+        router?.coordinateToDetails()
     }
 }

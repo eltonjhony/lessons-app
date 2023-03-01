@@ -27,7 +27,8 @@ public class ServiceRegistry: ServiceRegistryProtocol {
         )
 
         lessonRepository = LessonRepository(
-            service: servicesFactory.networkServices.lessonService
+            service: servicesFactory.networkServices.lessonService,
+            storage: servicesFactory.persistenceServices.lessonStorage
         )
     }
 }

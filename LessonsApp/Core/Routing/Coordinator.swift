@@ -17,7 +17,7 @@ public enum CoordinatorRoute {
     case string(StringCoordinatorParam)
 }
 
-public protocol Coordinator {
+public protocol Coordinator: AnyObject {
     var rootViewController: UIViewController? { get set }
 
     func start(with route: CoordinatorRoute?)
@@ -64,18 +64,5 @@ extension Coordinator {
 
     public func popToRootView() {
         rootVC?.popToRootViewController()
-    }
-}
-
-final class AppHostingController<Content>: UIHostingController<AnyView> where Content: View {
-
-    public init(rootView: Content, imagePresenter: ImagePresentable) {
-        let viewWithEnv = rootView
-            .environmentObject(SUIImagePresenter(presenter: imagePresenter))
-        super.init(rootView: AnyView(viewWithEnv))
-    }
-
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

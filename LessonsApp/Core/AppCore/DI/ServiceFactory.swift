@@ -13,7 +13,7 @@ public protocol NetworkServicesModuleProtocol {
 }
 
 public protocol PersistenceModuleProtocol {
-
+    var lessonStorage: LessonLocalStorable { get }
 }
 
 public protocol ServicesFactoryProtocol {
@@ -35,7 +35,9 @@ public struct ServicesFactory: ServicesFactoryProtocol {
         )
         let apiEndpointResources = applicationConfigurable.endpointResources
 
+        let dbConfigurable = applicationConfigurable.dbConfigurable
+
         networkServices = NetworkServicesModule(webService: webService, apiEndpointResource: apiEndpointResources)
-        persistenceServices = PersistenceServicesModule()
+        persistenceServices = PersistenceServicesModule(dbConfigurable: dbConfigurable)
     }
 }

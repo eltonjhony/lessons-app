@@ -17,7 +17,7 @@ public final class MainRouterModule {
         self.globalModule = globalModule
     }
 
-    public func createViewController() -> UIViewController {
+    public func createViewController(router: MainRoutable) -> UIViewController {
 
         let imageInteractor = ImageInteractor(
             imageRepository: globalModule.services.imageRepository
@@ -27,10 +27,11 @@ public final class MainRouterModule {
             lessonRepository: globalModule.services.lessonRepository
         )
 
-        let presenter = ListingPresenter(interactor: lessonInteractor)
+        let presenter = ListingPresenter(interactor: lessonInteractor, router: router)
         let mainView = ListingView(presenter: presenter)
-        return AppHostingController(
-            rootView: mainView,
+        return SUIViewController(
+            view: mainView,
+            presenter: presenter,
             imagePresenter: ImagePresenter(imageInteractor: imageInteractor)
         )
     }

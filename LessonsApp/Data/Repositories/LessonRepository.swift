@@ -10,12 +10,25 @@ import Combine
 
 public final class LessonRepository: LessonRepositoryProtocol {
     private let service: LessonServiceProtocol
+    private let storage: LessonLocalStorable
 
-    public init(service: LessonServiceProtocol) {
+    public init(service: LessonServiceProtocol, storage: LessonLocalStorable) {
         self.service = service
+        self.storage = storage
     }
 
     public func fetchAll() -> AnyPublisher<[LessonModel], Error> {
-        service.fetchAllLessons()
+        let cachedPublisher = storage.getAll()
+        return service.fetchAllLessons()
+            .handleEvents(receiveOutput: { [weak self] lessons in
+                lessons.forEach { lesson in
+                    self?.storage.update(with: lesson)
+                }
+            })
+            .tryCatch { error in
+                guard case .connectionError = error.networkError else { throw error }
+                return cachedPublisher
+            }
+            .eraseToAnyPublisher()
     }
 }

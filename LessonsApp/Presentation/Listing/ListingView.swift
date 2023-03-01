@@ -12,20 +12,14 @@ struct ListingView<Presenter: ListingPresentable>: View {
     @ObservedObject var presenter: Presenter
 
     var body: some View {
-        NavigationView {
-            content
-                .navigationBarTitle("Lessons", displayMode: .large)
-                .onAppear(perform: presenter.fetchLessons)
-        }
-    }
-
-    private var content: some View {
         ScrollView {
-            ForEach(presenter.lessons, id: \.self) { lesson in
+            ForEach(presenter.lessons, id: \.id) { lesson in
                 ListingItem(item: lesson)
+                    .onTapGesture(perform: presenter.detailsTapped)
             }
         }.padding(.top)
     }
+    
 }
 
 private struct ListingItem: View {
