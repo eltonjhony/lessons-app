@@ -10,4 +10,5 @@ import Combine
 
 public protocol LessonRepositoryProtocol {
     func fetchAll() -> AnyPublisher<[LessonModel], Error>
+    func getById(_ id: Int) -> AnyPublisher<LessonModel?, Error>
 }

@@ -31,4 +31,8 @@ public final class LessonRepository: LessonRepositoryProtocol {
             }
             .eraseToAnyPublisher()
     }
+
+    public func getById(_ id: Int) -> AnyPublisher<LessonModel?, Error> {
+        storage.getById(id)
+    }
 }

@@ -10,7 +10,7 @@ import Combine
 
 public protocol ListingPresentable: SUIPresentable {
     var lessons: [LessonModel] { get }
-    func detailsTapped()
+    func detailsTapped(id: Int)
 }
 
 public final class ListingPresenter: ListingPresentable {
@@ -39,7 +39,7 @@ public final class ListingPresenter: ListingPresentable {
         interactor.fetchLessons()
     }
 
-    public func detailsTapped() {
-        router?.coordinateToDetails()
+    public func detailsTapped(id: Int) {
+        router?.coordinateToDetails(with: id)
     }
 }

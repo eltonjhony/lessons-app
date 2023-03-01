@@ -15,12 +15,15 @@ public protocol Updateable: AnyObject {
 }
 
 public struct DetailsViewModel: Equatable {
+    let title: String
+    let description: String
     let videoURL: String
     let thumbnailURL: String
 }
 
 private enum Constants {
     static let videoPlayerHeight: CGFloat = 250
+    static let regularHorizontalPadding: CGFloat = 16
 }
 
 final class DetailsView<Presenter: DetailsPresentable>: SUIView {
@@ -45,6 +48,26 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         return view
     }()
 
+    private lazy var titleView: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        view.textAlignment = .left
+        view.lineBreakMode = .byWordWrapping
+        view.numberOfLines = 0
+        return view
+    }()
+
+    private lazy var descriptionView: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        view.textAlignment = .left
+        view.lineBreakMode = .byWordWrapping
+        view.numberOfLines = 0
+        return view
+    }()
+
     init(presenter: Presenter, imagePresenter: ImagePresenter) {
         self.presenter = presenter
         self.imagePresenter = imagePresenter
@@ -65,17 +88,35 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     func setup() {
         addSubview(videoPlayerContainerView)
         videoPlayerContainerView.addSubview(thumbnailPlayerView)
+        addSubview(titleView)
+        addSubview(descriptionView)
         NSLayoutConstraint.activate([
-            videoPlayerContainerView.topAnchor.constraint(equalTo: topAnchor, constant: .zero),
+            videoPlayerContainerView.topAnchor.constraint(equalTo: topAnchor),
             videoPlayerContainerView.heightAnchor.constraint(equalToConstant: Constants.videoPlayerHeight),
-            videoPlayerContainerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: .zero),
-            videoPlayerContainerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: .zero)
+            videoPlayerContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            videoPlayerContainerView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         NSLayoutConstraint.activate([
-            thumbnailPlayerView.topAnchor.constraint(equalTo: videoPlayerContainerView.topAnchor, constant: .zero),
-            thumbnailPlayerView.bottomAnchor.constraint(equalTo: videoPlayerContainerView.bottomAnchor, constant: .zero),
-            thumbnailPlayerView.leadingAnchor.constraint(equalTo: videoPlayerContainerView.leadingAnchor, constant: .zero),
-            thumbnailPlayerView.trailingAnchor.constraint(equalTo: videoPlayerContainerView.trailingAnchor, constant: .zero)
+            videoPlayerContainerView.topAnchor.constraint(equalTo: topAnchor),
+            videoPlayerContainerView.heightAnchor.constraint(equalToConstant: Constants.videoPlayerHeight),
+            videoPlayerContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            videoPlayerContainerView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            thumbnailPlayerView.topAnchor.constraint(equalTo: videoPlayerContainerView.topAnchor),
+            thumbnailPlayerView.bottomAnchor.constraint(equalTo: videoPlayerContainerView.bottomAnchor),
+            thumbnailPlayerView.leadingAnchor.constraint(equalTo: videoPlayerContainerView.leadingAnchor),
+            thumbnailPlayerView.trailingAnchor.constraint(equalTo: videoPlayerContainerView.trailingAnchor)
+        ])
+        NSLayoutConstraint.activate([
+            titleView.topAnchor.constraint(equalTo: videoPlayerContainerView.bottomAnchor, constant: Constants.regularHorizontalPadding),
+            titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.regularHorizontalPadding),
+            titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.regularHorizontalPadding)
+        ])
+        NSLayoutConstraint.activate([
+            descriptionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: Constants.regularHorizontalPadding),
+            descriptionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.regularHorizontalPadding),
+            descriptionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.regularHorizontalPadding)
         ])
         sinkSubscriptions()
     }
@@ -112,6 +153,9 @@ extension DetailsView: Updateable {
         videoPlayer.view.frame = videoPlayerContainerView.bounds
         videoPlayerContainerView.insertSubview(videoPlayer.view, belowSubview: thumbnailPlayerView)
         attachVideoPlayerToParent()
+
+        titleView.text = model.title
+        descriptionView.text = model.description
     }
 
     private func attachVideoPlayerToParent() {

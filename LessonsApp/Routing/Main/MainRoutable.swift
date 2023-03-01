@@ -10,7 +10,7 @@ import UIKit
 
 public protocol MainRoutable: Coordinator {
     func start(window: UIWindow)
-    func coordinateToDetails()
+    func coordinateToDetails(with id: Int)
 }
 
 public class MainApplicationRouter: MainRoutable {
@@ -29,9 +29,10 @@ public class MainApplicationRouter: MainRoutable {
         push(mainApplicationRouterModule.createViewController(router: self))
     }
 
-    public func coordinateToDetails() {
+    public func coordinateToDetails(with id: Int) {
         let detailsModule = DetailsRouterModule(
-            globalModule: mainApplicationRouterModule.globalModule
+            globalModule: mainApplicationRouterModule.globalModule,
+            lessonId: id
         )
         let detailsRouter = DetailsRouter(detailsRouterModule: detailsModule)
         detailsRouter.rootViewController = rootViewController

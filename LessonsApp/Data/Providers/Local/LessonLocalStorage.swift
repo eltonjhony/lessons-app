@@ -10,6 +10,7 @@ import Combine
 
 public protocol LessonLocalStorable {
     func getAll() -> AnyPublisher<[LessonModel], Error>
+    func getById(_ id: Int) -> AnyPublisher<LessonModel?, Error>
     func update(with lesson: LessonModel)
 }
 
@@ -26,6 +27,16 @@ final class LessonLocalStorage: LessonLocalStorable {
                 $0.map { entity in
                     LessonModel.mapFromPersistenceObject(entity)
                 }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    func getById(_ id: Int) -> AnyPublisher<LessonModel?, Error> {
+        dbManager.fetch(LessonEntity.self, predicate: NSPredicate(format: "id == %d", id), sorted: nil)
+            .map {
+                $0.map { entity in
+                    LessonModel.mapFromPersistenceObject(entity)
+                }.first
             }
             .eraseToAnyPublisher()
     }

@@ -15,11 +15,13 @@ struct ListingView<Presenter: ListingPresentable>: View {
         ScrollView {
             ForEach(presenter.lessons, id: \.id) { lesson in
                 ListingItem(item: lesson)
-                    .onTapGesture(perform: presenter.detailsTapped)
+                    .onTapGesture {
+                        presenter.detailsTapped(id: lesson.id)
+                    }
             }
         }.padding(.top)
     }
-    
+
 }
 
 private struct ListingItem: View {

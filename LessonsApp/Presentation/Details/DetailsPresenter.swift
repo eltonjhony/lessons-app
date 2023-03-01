@@ -19,11 +19,31 @@ public final class DetailsPresenter: DetailsPresentable {
     }
     private var dataSubject: CurrentValueSubject<DetailsViewModel?, Never> = .init(nil)
 
-    public init() {
+    private let lessonId: Int
+    private let interactor: LessonInteractor
 
+    private var cancellables = [AnyCancellable]()
+
+    public init(lessonId: Int, interactor: LessonInteractor) {
+        self.lessonId = lessonId
+        self.interactor = interactor
     }
 
     public func viewDidAppear() {
-        dataSubject.send(.init(videoURL: "https://embed-ssl.wistia.com/deliveries/cc8402e8c16cc8f36d3f63bd29eb82f99f4b5f88/accudvh5jy.mp4", thumbnailURL: "https://embed-ssl.wistia.com/deliveries/b57817b5b05c3e3129b7071eee83ecb7.jpg?image_crop_resized=1000x560"))
+        interactor.getById(lessonId)
+            .sink { [weak self] model in
+                guard let self = self, let model = model else { return }
+                self.dataSubject.send(model.data)
+            }.store(in: &cancellables)
+    }
+}
+
+private extension LessonModel {
+    var data: DetailsViewModel {
+        .init(
+            title: name,
+            description: description,
+            videoURL: videoUrl,
+            thumbnailURL: thumbnail)
     }
 }

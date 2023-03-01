@@ -10,7 +10,9 @@ import Combine
 
 public protocol LessonInteractable {
     var lessons: AnyPublisher<[LessonModel], Never> { get }
+
     func fetchLessons()
+    func getById(_ id: Int) -> AnyPublisher<LessonModel?, Never>
 }
 
 public final class LessonInteractor: LessonInteractable {
@@ -34,5 +36,11 @@ public final class LessonInteractor: LessonInteractable {
             } receiveValue: { [weak self] lessons in
                 self?.lessonsSubject.send(lessons)
             }.store(in: &cancellables)
+    }
+
+    public func getById(_ id: Int) -> AnyPublisher<LessonModel?, Never> {
+        lessonRepository.getById(id)
+            .replaceError(with: nil)
+            .eraseToAnyPublisher()
     }
 }
