@@ -23,7 +23,6 @@ final class ImageService: ImageServiceProtocol {
     func downloadImage(url: URL) -> AnyPublisher<Data, Error> {
         let imageURLRequest = URLRequest(url: url)
         let data: AnyPublisher<Data, Error> = webService.get(urlRequest: imageURLRequest)
-
         return data
             .eraseToAnyPublisher()
     }

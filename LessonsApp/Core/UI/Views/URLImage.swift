@@ -17,11 +17,9 @@ struct URLImage: View {
     @State private var image: UIImage?
 
     @State private var cancellable: AnyCancellable?
-    private let placeholderImage: UIImage?
 
-    public init(url: URL?, placeholderImage: UIImage? = nil) {
+    public init(url: URL?) {
         self.url = url
-        self.placeholderImage = placeholderImage
     }
 
     public var body: some View {
@@ -32,7 +30,6 @@ struct URLImage: View {
                     .resizable()
             }
         }
-        .onAppear(perform: loadPlaceholder)
         .onAppear(perform: loadImage)
         .onDisappear(perform: stopLoadingImage)
     }
@@ -45,18 +42,10 @@ struct URLImage: View {
         guard let url = url else { return }
         cancellable = imagePresenter.wrapped?
             .load(imageUrl: url)
-            .sink(receiveCompletion: { completion in
-                guard case .failure = completion else { return }
-                self.loadPlaceholder()
-            }, receiveValue: { loadedImage in
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { loadedImage in
                 self.image = UIImage(data: loadedImage.data)
             })
-    }
-
-    private func loadPlaceholder() {
-        if let placeholder = placeholderImage {
-            image = placeholder
-        }
     }
 
     private func stopLoadingImage() {

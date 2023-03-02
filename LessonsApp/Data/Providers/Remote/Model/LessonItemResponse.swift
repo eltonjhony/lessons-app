@@ -28,6 +28,7 @@ extension LessonModel: MappableProtocol {
         entity.desc = description
         entity.thumbnail = thumbnail
         entity.videoUrl = videoUrl
+        entity.localVideoUrl = localVideoUrl
         return entity
     }
 
@@ -37,7 +38,8 @@ extension LessonModel: MappableProtocol {
             name: object.name,
             description: object.desc,
             thumbnail: object.thumbnail,
-            videoUrl: object.videoUrl
+            videoUrl: object.videoUrl,
+            localVideoUrl: object.localVideoUrl
         )
     }
 }

@@ -14,7 +14,7 @@ public protocol ServiceRegistryProtocol {
     var taskDownloadable: TaskDownloadable { get }
 }
 
-public class ServiceRegistry: ServiceRegistryProtocol {
+public final class ServiceRegistry: ServiceRegistryProtocol {
 
     public var imageRepository: ImageRepositoryProtocol
     public var lessonRepository: LessonRepositoryProtocol

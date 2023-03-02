@@ -32,6 +32,7 @@ final class AppSetup: NSObject {
 
     public func bootApp(window: UIWindow) {
         applicationRouter.start(window: window)
+        Appearance.apply()
     }
 }
 

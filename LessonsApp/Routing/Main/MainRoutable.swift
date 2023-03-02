@@ -13,7 +13,7 @@ public protocol MainRoutable: Coordinator {
     func coordinateToDetails(with id: Int)
 }
 
-public class MainApplicationRouter: MainRoutable {
+public final class MainApplicationRouter: MainRoutable {
 
     public var rootViewController: UIViewController?
 

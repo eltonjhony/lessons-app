@@ -49,9 +49,9 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
 
     override open func loadView() {
         super.loadView()
+        view.backgroundColor = .secondarySystemBackground
         if let hostingView = hostingView {
             view.addAligned(subView: hostingView)
-            updateBarTintColor()
         }
     }
 
@@ -67,7 +67,6 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.sizeToFit()
-        updateNavigationBar()
     }
 
     public override func viewDidLoad() {
@@ -81,16 +80,6 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
         presenter.onAppear()
     }
 
-    public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        self.updateBarTintColor()
-    }
-
-    private func updateBarTintColor() {
-        let style = UITraitCollection.current.userInterfaceStyle
-        view.backgroundColor = style == .dark ? .black : .white
-        navigationController?.navigationBar.tintColor = style == .dark ? .white : .black
-    }
 }
 
 // MARK: - Navigation Bar
@@ -103,7 +92,6 @@ private extension SUIViewController {
 
     func updateNavigationBar() {
         navigationController?.isNavigationBarHidden = hideNativeNavigationBar
-        navigationItem.setHidesBackButton(presenter.navigationBar?.isBackButtonHidden == true, animated: false)
         guard presenter.navigationBar != navigationBarData else {
             return
         }

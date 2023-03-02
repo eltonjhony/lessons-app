@@ -8,18 +8,25 @@
 import Foundation
 import Combine
 
+public enum LessonsData: Equatable {
+    case idle
+    case error
+    case success([LessonModel])
+    case loading
+}
+
 public protocol LessonInteractable {
-    var lessons: AnyPublisher<[LessonModel], Never> { get }
+    var lessonsData: AnyPublisher<LessonsData, Never> { get }
 
     func fetchLessons()
     func getById(_ id: Int) -> AnyPublisher<LessonModel?, Never>
 }
 
 public final class LessonInteractor: LessonInteractable {
-    public var lessons: AnyPublisher<[LessonModel], Never> {
-        lessonsSubject.eraseToAnyPublisher()
+    public var lessonsData: AnyPublisher<LessonsData, Never> {
+        lessonsDataSubject.eraseToAnyPublisher()
     }
-    private var lessonsSubject: CurrentValueSubject<[LessonModel], Never> = .init([])
+    private var lessonsDataSubject: CurrentValueSubject<LessonsData, Never> = .init(.idle)
 
     private let lessonRepository: LessonRepositoryProtocol
 
@@ -30,9 +37,13 @@ public final class LessonInteractor: LessonInteractable {
     }
 
     public func fetchLessons() {
+        lessonsDataSubject.send(.loading)
         lessonRepository.fetchAll()
-            .sink { _ in } receiveValue: { [weak self] lessons in
-                self?.lessonsSubject.send(lessons)
+            .sink { [weak self] completion in
+                guard case .failure = completion else { return }
+                self?.lessonsDataSubject.send(.error)
+            } receiveValue: { [weak self] lessons in
+                self?.lessonsDataSubject.send(.success(lessons))
             }.store(in: &cancellables)
     }
 

@@ -30,7 +30,10 @@ public final class DetailsRouterModule {
             lessonRepository: lessonRepository)
 
         let interactor = LessonInteractor(lessonRepository: lessonRepository)
-        let presenter = DetailsPresenter(lessonId: lessonId, interactor: interactor, downloadInteractor: downloadInteractor)
+        let presenter = DetailsPresenter(
+            lessonId: lessonId,
+            interactor: interactor,
+            downloadInteractor: downloadInteractor)
 
         let detailsView = DetailsView(presenter: presenter, imagePresenter: imagePresenter)
 

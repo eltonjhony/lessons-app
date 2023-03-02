@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 public protocol ListingPresentable: SUIPresentable {
-    var lessons: [LessonModel] { get }
+    var data: LessonsData { get }
     func detailsTapped(id: Int)
 }
 
@@ -20,7 +20,7 @@ public final class ListingPresenter: ListingPresentable {
         largeTitle: true
     )
 
-    @Published public var lessons: [LessonModel] = []
+    @Published public var data: LessonsData = .idle
 
     private let interactor: LessonInteractable
     private weak var router: MainRoutable?
@@ -30,8 +30,8 @@ public final class ListingPresenter: ListingPresentable {
     public init(interactor: LessonInteractable, router: MainRoutable) {
         self.interactor = interactor
         self.router = router
-        interactor.lessons
-            .assign(to: \.lessons, on: self)
+        interactor.lessonsData
+            .assign(to: \.data, on: self)
             .store(in: &cancellables)
     }
 

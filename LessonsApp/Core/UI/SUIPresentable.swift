@@ -12,16 +12,13 @@ import Combine
 
 public struct SUIPresentableNavigationBar: Equatable {
     public let title: String?
-    public let isBackButtonHidden: Bool
     public let largeTitle: Bool
 
     init(
         title: String? = nil,
-        isBackButtonHidden: Bool = false,
         largeTitle: Bool = false
     ) {
         self.title = title
-        self.isBackButtonHidden = isBackButtonHidden
         self.largeTitle = largeTitle
     }
 }

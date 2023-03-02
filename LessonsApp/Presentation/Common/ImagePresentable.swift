@@ -12,7 +12,7 @@ public protocol ImagePresentable {
     func load(imageUrl: URL) -> AnyPublisher<ImageModel, Error>
 }
 
-public class ImagePresenter: ImagePresentable {
+public final class ImagePresenter: ImagePresentable {
     let imageInteractor: ImageInteractable
 
     public init(imageInteractor: ImageInteractable) {

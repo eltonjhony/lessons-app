@@ -12,7 +12,7 @@ public protocol DetailsRoutable: Coordinator {
     func start()
 }
 
-public class DetailsRouter: DetailsRoutable {
+public final class DetailsRouter: DetailsRoutable {
     public var rootViewController: UIViewController?
 
     private let detailsRouterModule: DetailsRouterModule

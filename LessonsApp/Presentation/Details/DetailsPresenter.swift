@@ -10,7 +10,7 @@ import Combine
 
 public protocol DetailsPresentable: SUIPresentable {
     var data: AnyPublisher<DetailsViewModel?, Never> { get }
-    var state: AnyPublisher<DownloadState, Never> { get }
+    var downloadState: AnyPublisher<DownloadState, Never> { get }
 }
 
 public final class DetailsPresenter: DetailsPresentable {
@@ -25,7 +25,7 @@ public final class DetailsPresenter: DetailsPresentable {
     }
     private var dataSubject: CurrentValueSubject<DetailsViewModel?, Never> = .init(nil)
 
-    public var state: AnyPublisher<DownloadState, Never> {
+    public var downloadState: AnyPublisher<DownloadState, Never> {
         downloadInteractor.state.eraseToAnyPublisher()
     }
 
@@ -57,10 +57,11 @@ public final class DetailsPresenter: DetailsPresentable {
                     self.lessonId+=1
                     self.fetchData()
                 }
-                self.dataSubject.send(model.toData(
+                let data = model.toData(
                     nextLessonAction,
-                    self.downloadInteractor.cancel)
+                    self.downloadInteractor.cancel
                 )
+                self.dataSubject.send(data)
             }.store(in: &cancellables)
     }
 
@@ -83,7 +84,7 @@ private extension LessonModel {
         .init(
             title: name,
             description: description,
-            videoURL: videoUrl,
+            videoURL: localVideoUrl ?? videoUrl,
             thumbnailURL: thumbnail,
             nextLessonAction: nextLessonAction,
             cancelDownloadAction: cancelDownloadAction

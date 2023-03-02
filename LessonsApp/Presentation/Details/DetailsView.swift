@@ -180,12 +180,14 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
             self?.model?.nextLessonAction()
         }.store(in: &cancellables)
 
-        presenter.state.sink { [weak self] state in
+        presenter.downloadState.sink { [weak self] state in
+            guard let self = self else { return }
             switch state {
             case .downloaded, .cancelled:
-                self?.downloadDidFinish()
+                self.downloadProgressController.dismiss(animated: true)
             case let .inProgress(value):
-                self?.updateDownloadingProgress(with: value)
+                self.progressView.setProgress(value, animated: true)
+                self.present(self.downloadProgressController)
             default: break
             }
         }.store(in: &cancellables)
@@ -196,15 +198,6 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         )
     }
 
-    private func updateDownloadingProgress(with value: Float) {
-        progressView.setProgress(value, animated: true)
-        present(downloadProgressController)
-    }
-
-    private func downloadDidFinish() {
-        downloadProgressController.dismiss(animated: true)
-    }
-    
 }
 
 extension DetailsView: Updateable {

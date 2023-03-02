@@ -11,7 +11,7 @@ public protocol HTTPHeadersProvider {
     func headers() -> [String: String]
 }
 
-class HTTPHeadersProviders {
+final class HTTPHeadersProviders {
     private let providers: [HTTPHeadersProvider]
 
     init(_ providers: [HTTPHeadersProvider]) {
