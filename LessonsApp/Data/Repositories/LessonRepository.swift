@@ -42,4 +42,8 @@ public final class LessonRepository: LessonRepositoryProtocol {
     public func getById(_ id: Int) -> AnyPublisher<LessonModel?, Error> {
         storage.getById(id)
     }
+
+    public func update(with lesson: LessonModel) {
+        storage.update(with: lesson)
+    }
 }

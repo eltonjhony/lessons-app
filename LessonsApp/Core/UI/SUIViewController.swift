@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import Combine
 
 public class SUIViewController<Presenter>: UIViewController where Presenter: SUIPresentable {
 
@@ -18,6 +19,8 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
     private var hostingView: SUIView?
 
     private var supportedOrientations: UIInterfaceOrientationMask
+
+    private var cancellables = [AnyCancellable]()
 
     public init<V: View>(view: V, presenter: Presenter, imagePresenter: ImagePresentable? = nil, supportedOrientations: UIInterfaceOrientationMask = .portrait) {
         self.presenter = presenter
@@ -69,6 +72,11 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+
+        presenter.rightBarButtons?.sink(receiveValue: { [weak self] buttons in
+            self?.setRightBarButtons(buttons)
+        }).store(in: &cancellables)
+
         hostingView?.parent = self
         presenter.onAppear()
     }
@@ -105,5 +113,25 @@ private extension SUIViewController {
         }
         navigationItem.title = data.title
         navigationItem.largeTitleDisplayMode = data.largeTitle ? .always : .never
+    }
+
+    func setRightBarButtons(_ buttons: [ButtonModel]) {
+        if navigationItem.rightBarButtonItem == nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem()
+        }
+        buttons.forEach { buttonModel in
+            let customView = UIButton()
+            if let icon = buttonModel.icon {
+                customView.setImage(UIImage(systemName: icon), for: .normal)
+            }
+            customView.setTitle(buttonModel.title, for: .normal)
+            customView.setTitleColor(.link, for: .normal)
+            customView.tintColor = .link
+            navigationItem.rightBarButtonItem?.customView = customView
+            navigationItem.rightBarButtonItem?.isEnabled = buttonModel.enabled
+            navigationItem.rightBarButtonItem?.customView?.gesture().sink(receiveValue: { _ in
+                buttonModel.action()
+            }).store(in: &cancellables)
+        }
     }
 }

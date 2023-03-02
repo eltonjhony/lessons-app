@@ -13,4 +13,5 @@ public struct LessonModel: Equatable {
     let description: String
     let thumbnail: String
     let videoUrl: String
+    var localVideoUrl: String?
 }

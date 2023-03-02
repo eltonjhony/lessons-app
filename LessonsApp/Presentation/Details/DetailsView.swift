@@ -15,6 +15,7 @@ public struct DetailsViewModel {
     let videoURL: String
     let thumbnailURL: String
     let nextLessonAction: () -> Void
+    let cancelDownloadAction: () -> Void
 }
 
 private enum Constants {
@@ -76,6 +77,23 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         view.tintColor = .link
         view.semanticContentAttribute = .forceRightToLeft
         return view
+    }()
+
+    private lazy var progressView: UIProgressView = {
+        let progressView = UIProgressView(progressViewStyle: .default)
+        progressView.frame = CGRect(x: 10, y: 60, width: 250, height: 0)
+        progressView.tintColor = .orange
+        return progressView
+    }()
+
+    private lazy var downloadProgressController: UIAlertController = {
+        let alertController = UIAlertController(title: "Downloading...", message: "\n\n", preferredStyle: .alert)
+        alertController.view.addSubview(progressView)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+            self?.model?.cancelDownloadAction()
+        }
+        alertController.addAction(cancelAction)
+        return alertController
     }()
 
     private var model: DetailsViewModel?
@@ -162,10 +180,29 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
             self?.model?.nextLessonAction()
         }.store(in: &cancellables)
 
+        presenter.state.sink { [weak self] state in
+            switch state {
+            case .downloaded, .cancelled:
+                self?.downloadDidFinish()
+            case let .inProgress(value):
+                self?.updateDownloadingProgress(with: value)
+            default: break
+            }
+        }.store(in: &cancellables)
+
         NotificationCenter.default.addObserver(
             self, selector: #selector(orientationDidChange),
             name: UIDevice.orientationDidChangeNotification, object: nil
         )
+    }
+
+    private func updateDownloadingProgress(with value: Float) {
+        progressView.setProgress(value, animated: true)
+        present(downloadProgressController)
+    }
+
+    private func downloadDidFinish() {
+        downloadProgressController.dismiss(animated: true)
     }
     
 }
@@ -174,7 +211,7 @@ extension DetailsView: Updateable {
     func update(with model: DetailsViewModel) {
         self.model = model
 
-        guard let parent = parent, !videoPlayerController.isLoaded else {
+        guard !videoPlayerController.isLoaded else {
             videoPlayerController.seekPlayer()
             return
         }
@@ -183,11 +220,8 @@ extension DetailsView: Updateable {
         thumbnailPlayerView.update(with: .init(thumbnailURL: model.thumbnailURL))
 
         videoPlayerController.videoURL = URL(string: model.videoURL)
-        if parent.children.first(where: { $0 is VideoPlayerController} ) == nil {
-            parent.addChild(videoPlayerController)
-            videoPlayerController.didMove(toParent: parent)
-        }
-
+        moveChildToParent(videoPlayerController)
+        
         titleView.text = model.title
         descriptionView.text = model.description
     }

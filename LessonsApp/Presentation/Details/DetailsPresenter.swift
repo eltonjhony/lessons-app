@@ -10,25 +10,41 @@ import Combine
 
 public protocol DetailsPresentable: SUIPresentable {
     var data: AnyPublisher<DetailsViewModel?, Never> { get }
+    var state: AnyPublisher<DownloadState, Never> { get }
 }
 
 public final class DetailsPresenter: DetailsPresentable {
+
+    public var rightBarButtons: AnyPublisher<[ButtonModel], Never>? {
+        rightBarButtonsSubject.eraseToAnyPublisher()
+    }
+    private var rightBarButtonsSubject: PassthroughSubject<[ButtonModel], Never> = .init()
+
     public var data: AnyPublisher<DetailsViewModel?, Never> {
         dataSubject.eraseToAnyPublisher()
     }
     private var dataSubject: CurrentValueSubject<DetailsViewModel?, Never> = .init(nil)
 
+    public var state: AnyPublisher<DownloadState, Never> {
+        downloadInteractor.state.eraseToAnyPublisher()
+    }
+
     private var lessonId: Int
-    private let interactor: LessonInteractor
+    private var model: LessonModel?
+
+    private let interactor: LessonInteractable
+    private let downloadInteractor: DownloadInteractable
 
     private var cancellables = [AnyCancellable]()
 
-    public init(lessonId: Int, interactor: LessonInteractor) {
+    public init(lessonId: Int, interactor: LessonInteractable, downloadInteractor: DownloadInteractable) {
         self.lessonId = lessonId
         self.interactor = interactor
+        self.downloadInteractor = downloadInteractor
     }
 
     public func onAppear() {
+        configureDownload()
         fetchData()
     }
 
@@ -36,23 +52,41 @@ public final class DetailsPresenter: DetailsPresentable {
         interactor.getById(lessonId)
             .sink { [weak self] model in
                 guard let self = self, let model = model else { return }
+                self.model = model
                 let nextLessonAction = {
                     self.lessonId+=1
                     self.fetchData()
                 }
-                self.dataSubject.send(model.toData(nextLessonAction))
+                self.dataSubject.send(model.toData(
+                    nextLessonAction,
+                    self.downloadInteractor.cancel)
+                )
             }.store(in: &cancellables)
+    }
+
+    private func configureDownload() {
+        let downloadAction = { [weak self] in
+            guard let self = self, let model = self.model else { return }
+            self.downloadInteractor.download(videoURL: model.videoUrl, id: model.id)
+        }
+        let downloadModel: ButtonModel = .init(
+            title: "Download",
+            icon: "icloud.and.arrow.down",
+            enabled: true, action: downloadAction
+        )
+        rightBarButtonsSubject.send([downloadModel])
     }
 }
 
 private extension LessonModel {
-    func toData(_ nextLessonAction: @escaping () -> Void) -> DetailsViewModel {
+    func toData(_ nextLessonAction: @escaping () -> Void, _ cancelDownloadAction: @escaping () -> Void) -> DetailsViewModel {
         .init(
             title: name,
             description: description,
             videoURL: videoUrl,
             thumbnailURL: thumbnail,
-            nextLessonAction: nextLessonAction
+            nextLessonAction: nextLessonAction,
+            cancelDownloadAction: cancelDownloadAction
         )
     }
 }

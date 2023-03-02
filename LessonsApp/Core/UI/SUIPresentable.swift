@@ -28,6 +28,8 @@ public struct SUIPresentableNavigationBar: Equatable {
 
 public protocol SUIPresentable: ObservableObject {
     var navigationBar: SUIPresentableNavigationBar? { get }
+    var rightBarButtons: AnyPublisher<[ButtonModel], Never>? { get }
+
     func onAppear()
 }
 
@@ -37,8 +39,24 @@ extension SUIPresentable {
         get { return .init() } set {}
     }
 
+    public var rightBarButtons: AnyPublisher<[ButtonModel], Never>? {
+        get { return nil } set {}
+    }
+
 }
 
 open class SUIView: UIView {
-    public weak var parent: UIViewController?
+    weak var parent: UIViewController?
+
+    public func present(_ viewController: UIViewController) {
+        guard parent?.presentedViewController == nil else { return }
+        parent?.present(viewController, animated: true)
+    }
+
+    public func moveChildToParent(_ child: UIViewController) {
+        if parent?.children.first(where: { $0 == child }) == nil {
+            parent?.addChild(child)
+            child.didMove(toParent: parent)
+        }
+    }
 }

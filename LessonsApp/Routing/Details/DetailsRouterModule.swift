@@ -20,13 +20,20 @@ public final class DetailsRouterModule {
     }
 
     public func createViewController() -> UIViewController {
+        let lessonRepository = globalModule.services.lessonRepository
+
         let imageInteractor = ImageInteractor(imageRepository: globalModule.services.imageRepository)
         let imagePresenter = ImagePresenter(imageInteractor: imageInteractor)
-        let interactor = LessonInteractor(lessonRepository: globalModule.services.lessonRepository)
-        let presenter = DetailsPresenter(lessonId: lessonId, interactor: interactor)
-        return SUIViewController(
-            view: DetailsView(presenter: presenter, imagePresenter: imagePresenter),
-            presenter: presenter
-        )
+
+        let downloadInteractor = DownloadInteractor(
+            downloadable: globalModule.services.taskDownloadable,
+            lessonRepository: lessonRepository)
+
+        let interactor = LessonInteractor(lessonRepository: lessonRepository)
+        let presenter = DetailsPresenter(lessonId: lessonId, interactor: interactor, downloadInteractor: downloadInteractor)
+
+        let detailsView = DetailsView(presenter: presenter, imagePresenter: imagePresenter)
+
+        return SUIViewController(view: detailsView, presenter: presenter)
     }
 }

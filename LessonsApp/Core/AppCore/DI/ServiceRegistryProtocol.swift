@@ -10,12 +10,16 @@ import Foundation
 public protocol ServiceRegistryProtocol {
     var imageRepository: ImageRepositoryProtocol { get }
     var lessonRepository: LessonRepositoryProtocol { get }
+
+    var taskDownloadable: TaskDownloadable { get }
 }
 
 public class ServiceRegistry: ServiceRegistryProtocol {
 
     public var imageRepository: ImageRepositoryProtocol
     public var lessonRepository: LessonRepositoryProtocol
+
+    public var taskDownloadable: TaskDownloadable
 
     private let servicesFactory: ServicesFactoryProtocol
 
@@ -30,5 +34,7 @@ public class ServiceRegistry: ServiceRegistryProtocol {
             service: servicesFactory.networkServices.lessonService,
             storage: servicesFactory.persistenceServices.lessonStorage
         )
+
+        taskDownloadable = URLSessonTaskDownloader()
     }
 }

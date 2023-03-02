@@ -31,9 +31,7 @@ public final class LessonInteractor: LessonInteractable {
 
     public func fetchLessons() {
         lessonRepository.fetchAll()
-            .sink { completion in
-                //TODO
-            } receiveValue: { [weak self] lessons in
+            .sink { _ in } receiveValue: { [weak self] lessons in
                 self?.lessonsSubject.send(lessons)
             }.store(in: &cancellables)
     }
