@@ -35,7 +35,7 @@ public final class ListingPresenter: ListingPresentable {
             .store(in: &cancellables)
     }
 
-    public func viewDidAppear() {
+    public func onAppear() {
         interactor.fetchLessons()
     }
 

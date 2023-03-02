@@ -7,10 +7,9 @@
 
 import Foundation
 import Combine
-import UIKit
 
 public protocol ImagePresentable {
-    func load(imageUrl: URL) -> AnyPublisher<UIImage?, Error>
+    func load(imageUrl: URL) -> AnyPublisher<ImageModel, Error>
 }
 
 public class ImagePresenter: ImagePresentable {
@@ -20,7 +19,7 @@ public class ImagePresenter: ImagePresentable {
         self.imageInteractor = imageInteractor
     }
 
-    public func load(imageUrl: URL) -> AnyPublisher<UIImage?, Error> {
+    public func load(imageUrl: URL) -> AnyPublisher<ImageModel, Error> {
         imageInteractor.load(url: imageUrl)
     }
 }

@@ -49,7 +49,7 @@ struct URLImage: View {
                 guard case .failure = completion else { return }
                 self.loadPlaceholder()
             }, receiveValue: { loadedImage in
-                self.image = loadedImage
+                self.image = UIImage(data: loadedImage.data)
             })
     }
 

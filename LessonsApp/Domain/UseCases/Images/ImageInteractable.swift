@@ -7,10 +7,9 @@
 
 import Foundation
 import Combine
-import UIKit
 
 public protocol ImageInteractable {
-    func load(url: URL) -> AnyPublisher<UIImage?, Error>
+    func load(url: URL) -> AnyPublisher<ImageModel, Error>
 }
 
 public final class ImageInteractor: ImageInteractable {
@@ -20,7 +19,7 @@ public final class ImageInteractor: ImageInteractable {
         self.imageRepository = imageRepository
     }
 
-    public func load(url: URL) -> AnyPublisher<UIImage?, Error> {
+    public func load(url: URL) -> AnyPublisher<ImageModel, Error> {
         imageRepository.downloadImage(url: url)
     }
 }

@@ -7,8 +7,7 @@
 
 import Foundation
 import Combine
-import UIKit
 
 public protocol ImageRepositoryProtocol {
-    func downloadImage(url: URL) -> AnyPublisher<UIImage?, Error>
+    func downloadImage(url: URL) -> AnyPublisher<ImageModel, Error>
 }

@@ -13,13 +13,12 @@ public protocol DetailsPresentable: SUIPresentable {
 }
 
 public final class DetailsPresenter: DetailsPresentable {
-
     public var data: AnyPublisher<DetailsViewModel?, Never> {
         dataSubject.eraseToAnyPublisher()
     }
     private var dataSubject: CurrentValueSubject<DetailsViewModel?, Never> = .init(nil)
 
-    private let lessonId: Int
+    private var lessonId: Int
     private let interactor: LessonInteractor
 
     private var cancellables = [AnyCancellable]()
@@ -29,21 +28,31 @@ public final class DetailsPresenter: DetailsPresentable {
         self.interactor = interactor
     }
 
-    public func viewDidAppear() {
+    public func onAppear() {
+        fetchData()
+    }
+
+    private func fetchData() {
         interactor.getById(lessonId)
             .sink { [weak self] model in
                 guard let self = self, let model = model else { return }
-                self.dataSubject.send(model.data)
+                let nextLessonAction = {
+                    self.lessonId+=1
+                    self.fetchData()
+                }
+                self.dataSubject.send(model.toData(nextLessonAction))
             }.store(in: &cancellables)
     }
 }
 
 private extension LessonModel {
-    var data: DetailsViewModel {
+    func toData(_ nextLessonAction: @escaping () -> Void) -> DetailsViewModel {
         .init(
             title: name,
             description: description,
             videoURL: videoUrl,
-            thumbnailURL: thumbnail)
+            thumbnailURL: thumbnail,
+            nextLessonAction: nextLessonAction
+        )
     }
 }

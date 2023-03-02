@@ -62,15 +62,15 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
 
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hostingView?.parent = self
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.sizeToFit()
         updateNavigationBar()
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        presenter.viewDidAppear()
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        hostingView?.parent = self
+        presenter.onAppear()
     }
 
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

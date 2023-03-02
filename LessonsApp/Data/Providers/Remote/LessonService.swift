@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 public protocol LessonServiceProtocol {
-    func fetchAllLessons() -> AnyPublisher<[LessonModel], Error>
+    func fetchAllLessons() -> AnyPublisher<[LessonItemResponse], Error>
 }
 
 final class LessonService: LessonServiceProtocol {
@@ -22,7 +22,7 @@ final class LessonService: LessonServiceProtocol {
         self.endpoint = endpoint
     }
 
-    func fetchAllLessons() -> AnyPublisher<[LessonModel], Error> {
+    func fetchAllLessons() -> AnyPublisher<[LessonItemResponse], Error> {
         let lessonsURLRequest = URLRequest(url: endpoint.lessonsURL)
         let data: AnyPublisher<NetworkResponse<LessonResponse>, Error> = webService.get(urlRequest: lessonsURLRequest)
         return data

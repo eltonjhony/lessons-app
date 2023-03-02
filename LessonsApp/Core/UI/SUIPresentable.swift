@@ -27,11 +27,8 @@ public struct SUIPresentableNavigationBar: Equatable {
 }
 
 public protocol SUIPresentable: ObservableObject {
-
-    /// If nil, the native navigation bar will be hidden to leave place for custom SwiftUI content
     var navigationBar: SUIPresentableNavigationBar? { get }
-
-    func viewDidAppear()
+    func onAppear()
 }
 
 extension SUIPresentable {

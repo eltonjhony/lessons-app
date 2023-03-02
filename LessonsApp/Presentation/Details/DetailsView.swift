@@ -9,16 +9,12 @@ import Foundation
 import Combine
 import UIKit
 
-public protocol Updateable: AnyObject {
-    associatedtype Data
-    func update(with: Data)
-}
-
-public struct DetailsViewModel: Equatable {
+public struct DetailsViewModel {
     let title: String
     let description: String
     let videoURL: String
     let thumbnailURL: String
+    let nextLessonAction: () -> Void
 }
 
 private enum Constants {
@@ -33,7 +29,10 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     
     private var cancellables = [AnyCancellable]()
 
-    private let videoPlayer: VideoPlayerController = .init()
+    private lazy var videoPlayerController: VideoPlayerController = {
+        let controller = VideoPlayerController()
+        return controller
+    }()
 
     private lazy var videoPlayerContainerView: UIView = {
         let view = UIView(frame: .zero)
@@ -51,7 +50,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     private lazy var titleView: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
         view.numberOfLines = 0
@@ -61,12 +60,25 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     private lazy var descriptionView: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
         view.numberOfLines = 0
         return view
     }()
+
+    private lazy var nextLessonButton: UIButton = {
+        let view = UIButton(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setTitle("Next lesson", for: .normal)
+        view.setTitleColor(.link, for: .normal)
+        view.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        view.tintColor = .link
+        view.semanticContentAttribute = .forceRightToLeft
+        return view
+    }()
+
+    private var model: DetailsViewModel?
 
     init(presenter: Presenter, imagePresenter: ImagePresenter) {
         self.presenter = presenter
@@ -81,7 +93,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
 
     @objc func orientationDidChange() {
         if UIDevice.current.orientation.isLandscape {
-            videoPlayer.goFullScreen()
+            videoPlayerController.goFullScreen()
         }
     }
 
@@ -90,6 +102,16 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         videoPlayerContainerView.addSubview(thumbnailPlayerView)
         addSubview(titleView)
         addSubview(descriptionView)
+        addSubview(nextLessonButton)
+
+        videoPlayerController.view.frame = videoPlayerContainerView.bounds
+        videoPlayerContainerView.insertSubview(videoPlayerController.view, belowSubview: thumbnailPlayerView)
+
+        setupConstraints()
+        sinkSubscriptions()
+    }
+
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             videoPlayerContainerView.topAnchor.constraint(equalTo: topAnchor),
             videoPlayerContainerView.heightAnchor.constraint(equalToConstant: Constants.videoPlayerHeight),
@@ -118,18 +140,26 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
             descriptionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.regularHorizontalPadding),
             descriptionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.regularHorizontalPadding)
         ])
-        sinkSubscriptions()
+        NSLayoutConstraint.activate([
+            nextLessonButton.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: Constants.regularHorizontalPadding),
+            nextLessonButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.regularHorizontalPadding)
+        ])
     }
 
     private func sinkSubscriptions() {
         presenter.data.sink { [weak self] model in
             guard let model = model else { return }
+            self?.videoPlayerController.resetPlayer()
             self?.update(with: model)
         }.store(in: &cancellables)
 
         thumbnailPlayerView.gesture().sink { [weak self] _ in
             self?.thumbnailPlayerView.isHidden = true
-            self?.videoPlayer.player?.play()
+            self?.videoPlayerController.player?.play()
+        }.store(in: &cancellables)
+
+        nextLessonButton.gesture().sink { [weak self] _ in
+            self?.model?.nextLessonAction()
         }.store(in: &cancellables)
 
         NotificationCenter.default.addObserver(
@@ -142,26 +172,23 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
 
 extension DetailsView: Updateable {
     func update(with model: DetailsViewModel) {
-        guard !videoPlayer.isLoaded else {
-            videoPlayer.seekPlayer()
+        self.model = model
+
+        guard let parent = parent, !videoPlayerController.isLoaded else {
+            videoPlayerController.seekPlayer()
             return
         }
+
+        thumbnailPlayerView.isHidden = false
         thumbnailPlayerView.update(with: .init(thumbnailURL: model.thumbnailURL))
 
-        let url = URL(string: model.videoURL)
-        videoPlayer.videoURL = url
-        videoPlayer.view.frame = videoPlayerContainerView.bounds
-        videoPlayerContainerView.insertSubview(videoPlayer.view, belowSubview: thumbnailPlayerView)
-        attachVideoPlayerToParent()
+        videoPlayerController.videoURL = URL(string: model.videoURL)
+        if parent.children.first(where: { $0 is VideoPlayerController} ) == nil {
+            parent.addChild(videoPlayerController)
+            videoPlayerController.didMove(toParent: parent)
+        }
 
         titleView.text = model.title
         descriptionView.text = model.description
-    }
-
-    private func attachVideoPlayerToParent() {
-        guard let parent = parent else { return }
-        videoPlayer.removeFromParent()
-        parent.addChild(videoPlayer)
-        videoPlayer.didMove(toParent: parent)
     }
 }

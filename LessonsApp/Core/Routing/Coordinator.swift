@@ -8,20 +8,10 @@
 import UIKit
 import SwiftUI
 
-public typealias ModelCoordinatorParam = Codable
-public typealias StringCoordinatorParam = String
-
-/// Enumerates coordinator main routes params.
-public enum CoordinatorRoute {
-    case model(ModelCoordinatorParam)
-    case string(StringCoordinatorParam)
-}
-
 public protocol Coordinator: AnyObject {
     var rootViewController: UIViewController? { get set }
 
-    func start(with route: CoordinatorRoute?)
-    func coordinate(to coordinator: Coordinator, with route: CoordinatorRoute?)
+    func start()
     func push(_ viewController: UIViewController, animated: Bool)
     func present(_ viewController: UIViewController, animated: Bool)
     func dismiss(_ animated: Bool)
@@ -36,12 +26,8 @@ extension Coordinator {
 
     // MARK: - Action Methods
 
-    public func start(with route: CoordinatorRoute? = nil) {
-        start(with: route)
-    }
-
-    public func coordinate(to coordinator: Coordinator, with route: CoordinatorRoute? = nil) {
-        coordinator.start(with: route)
+    public func start() {
+        start()
     }
 
     public func push(_ viewController: UIViewController, animated: Bool = true) {

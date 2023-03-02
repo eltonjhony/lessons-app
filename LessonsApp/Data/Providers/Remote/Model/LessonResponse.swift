@@ -8,5 +8,5 @@
 import Foundation
 
 public struct LessonResponse: Codable {
-    let lessons: [LessonModel]
+    let lessons: [LessonItemResponse]
 }

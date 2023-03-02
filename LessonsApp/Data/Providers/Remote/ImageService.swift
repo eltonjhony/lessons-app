@@ -7,10 +7,9 @@
 
 import Foundation
 import Combine
-import UIKit
 
 public protocol ImageServiceProtocol {
-    func downloadImage(url: URL) -> AnyPublisher<UIImage?, Error>
+    func downloadImage(url: URL) -> AnyPublisher<Data, Error>
 }
 
 final class ImageService: ImageServiceProtocol {
@@ -21,12 +20,11 @@ final class ImageService: ImageServiceProtocol {
         self.webService = webService
     }
 
-    func downloadImage(url: URL) -> AnyPublisher<UIImage?, Error> {
+    func downloadImage(url: URL) -> AnyPublisher<Data, Error> {
         let imageURLRequest = URLRequest(url: url)
         let data: AnyPublisher<Data, Error> = webService.get(urlRequest: imageURLRequest)
 
         return data
-            .map(UIImage.init)
             .eraseToAnyPublisher()
     }
 }

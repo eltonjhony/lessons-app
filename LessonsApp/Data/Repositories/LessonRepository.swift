@@ -20,11 +20,18 @@ public final class LessonRepository: LessonRepositoryProtocol {
     public func fetchAll() -> AnyPublisher<[LessonModel], Error> {
         let cachedPublisher = storage.getAll()
         return service.fetchAllLessons()
-            .handleEvents(receiveOutput: { [weak self] lessons in
-                lessons.forEach { lesson in
-                    self?.storage.update(with: lesson)
+            .map { [weak self] lessons in
+                lessons.enumerated().map { (id, item) in
+                    let model: LessonModel = .init(
+                        id: id,
+                        name: item.name,
+                        description: item.description,
+                        thumbnail: item.thumbnail,
+                        videoUrl: item.videoUrl)
+                    self?.storage.update(with: model)
+                    return model
                 }
-            })
+            }
             .tryCatch { error in
                 guard case .connectionError = error.networkError else { throw error }
                 return cachedPublisher

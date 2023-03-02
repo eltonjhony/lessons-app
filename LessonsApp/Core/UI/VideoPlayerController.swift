@@ -11,18 +11,19 @@ public final class VideoPlayerController: AVPlayerViewController {
 
     private var currentTime: CMTime = .zero
     private var timeObserverToken: Any?
+
+    private(set) var isLoaded: Bool
     
     var videoURL: URL? {
         didSet {
             guard let videoURL = videoURL else { return }
+            removeTimeObserver()
             let player = AVPlayer(url: videoURL)
             self.player = player
             seekPlayer()
             isLoaded = true
         }
     }
-
-    var isLoaded: Bool
 
     public init() {
         self.isLoaded = false
@@ -42,6 +43,21 @@ public final class VideoPlayerController: AVPlayerViewController {
     public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         removeTimeObserver()
+    }
+
+    override public var shouldAutorotate: Bool {
+        true
+    }
+
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        [.portrait, .landscape]
+    }
+
+    public func resetPlayer() {
+        self.player?.pause()
+        currentTime = .zero
+        isLoaded = false
+        seekPlayer()
     }
 
     public func seekPlayer() {

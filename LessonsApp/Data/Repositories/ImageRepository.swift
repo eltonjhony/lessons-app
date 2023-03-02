@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import UIKit
 
 public final class ImageRepository: ImageRepositoryProtocol {
 
@@ -17,7 +16,11 @@ public final class ImageRepository: ImageRepositoryProtocol {
         self.service = service
     }
 
-    public func downloadImage(url: URL) -> AnyPublisher<UIImage?, Error> {
+    public func downloadImage(url: URL) -> AnyPublisher<ImageModel, Error> {
         service.downloadImage(url: url)
+            .map {
+                ImageModel(data: $0)
+            }
+            .eraseToAnyPublisher()
     }
 }

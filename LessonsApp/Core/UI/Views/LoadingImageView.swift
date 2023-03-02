@@ -92,7 +92,11 @@ private extension LoadingImageView {
         guard let imagePresenter = imagePresenter, !isCancelling else { return }
 
         if let url = url {
-            startLoading(imagePresenter.load(imageUrl: url))
+            startLoading(
+                imagePresenter.load(imageUrl: url)
+                    .map { UIImage.init(data: $0.data) }
+                    .eraseToAnyPublisher()
+            )
         }
 
     }

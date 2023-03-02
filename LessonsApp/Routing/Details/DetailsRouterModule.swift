@@ -26,8 +26,7 @@ public final class DetailsRouterModule {
         let presenter = DetailsPresenter(lessonId: lessonId, interactor: interactor)
         return SUIViewController(
             view: DetailsView(presenter: presenter, imagePresenter: imagePresenter),
-            presenter: presenter,
-            supportedOrientations: [.portrait, .landscape]
+            presenter: presenter
         )
     }
 }
