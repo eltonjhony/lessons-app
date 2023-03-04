@@ -10,7 +10,7 @@ import Combine
 
 public enum DownloadState {
     case inProgress(Float)
-    case downloaded(String, Int)
+    case downloaded
     case error
     case cancelled
 }
@@ -57,13 +57,9 @@ public final class URLSessonTaskDownloader: NSObject, TaskDownloadable, URLSessi
 
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         guard let id = id else { return }
-        let fileManager = FileManager.default
-        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let destinationURL = documentsDirectory.appendingPathComponent("video\(id).mp4")
-        try? fileManager.removeItem(at: destinationURL)
-        try? fileManager.moveItem(at: location, to: destinationURL)
+        FileManager.default.saveVideo(at: location, with: id)
         DispatchQueue.main.async {
-            self.stateSubject.send(.downloaded(destinationURL.absoluteString, id))
+            self.stateSubject.send(.downloaded)
         }
     }
 

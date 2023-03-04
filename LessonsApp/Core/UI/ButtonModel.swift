@@ -10,6 +10,5 @@ import Foundation
 public struct ButtonModel {
     public var title: String
     public var icon: String?
-    public var enabled: Bool
-    public let action: () -> Void
+    public let action: () -> Void?
 }

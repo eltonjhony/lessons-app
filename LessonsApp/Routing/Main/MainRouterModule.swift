@@ -27,8 +27,8 @@ public final class MainRouterModule {
             lessonRepository: globalModule.services.lessonRepository
         )
 
-        let presenter = ListingPresenter(interactor: lessonInteractor, router: router)
-        let mainView = ListingView(presenter: presenter)
+        let presenter = LessonsPresenter(interactor: lessonInteractor, router: router)
+        let mainView = LessonsView(presenter: presenter)
         return SUIViewController(
             view: mainView,
             presenter: presenter,

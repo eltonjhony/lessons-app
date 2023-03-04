@@ -29,8 +29,6 @@ public final class DownloadInteractor: DownloadInteractable {
     public init(downloadable: TaskDownloadable, lessonRepository: LessonRepositoryProtocol) {
         self.downloadable = downloadable
         self.lessonRepository = lessonRepository
-
-        registerForUpdates()
     }
 
     public func download(videoURL: String, id: Int) {
@@ -40,23 +38,5 @@ public final class DownloadInteractor: DownloadInteractable {
 
     public func cancel() {
         downloadable.cancel()
-    }
-
-    private func registerForUpdates() {
-        downloadable.state.sink { [weak self] state in
-            guard case let .downloaded(path, id) = state else { return }
-            self?.updateDownloadedVideo(with: path, id)
-        }.store(in: &cancellables)
-    }
-
-    private func updateDownloadedVideo(with path: String, _ id: Int) {
-        lessonRepository.getById(id)
-            .replaceError(with: nil)
-            .sink { [weak self] model in
-                guard let model = model else { return }
-                var lesson = model
-                lesson.localVideoUrl = path
-                self?.lessonRepository.update(with: lesson)
-            }.store(in: &cancellables)
     }
 }

@@ -8,8 +8,12 @@
 import Foundation
 import Combine
 
+public struct LessonResponse: Codable {
+    let lessons: [LessonModel]
+}
+
 public protocol LessonServiceProtocol {
-    func fetchAllLessons() -> AnyPublisher<[LessonItemResponse], Error>
+    func fetchAllLessons() -> AnyPublisher<[LessonModel], Error>
 }
 
 final class LessonService: LessonServiceProtocol {
@@ -22,7 +26,7 @@ final class LessonService: LessonServiceProtocol {
         self.endpoint = endpoint
     }
 
-    func fetchAllLessons() -> AnyPublisher<[LessonItemResponse], Error> {
+    func fetchAllLessons() -> AnyPublisher<[LessonModel], Error> {
         let lessonsURLRequest = URLRequest(url: endpoint.lessonsURL)
         let data: AnyPublisher<NetworkResponse<LessonResponse>, Error> = webService.get(urlRequest: lessonsURLRequest)
         return data

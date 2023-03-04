@@ -10,11 +10,12 @@ import Combine
 import UIKit
 
 public struct DetailsViewModel {
+    let id: Int
     let title: String
     let description: String
-    let videoURL: String
+    let videoUrl: String
     let thumbnailURL: String
-    let nextLessonAction: () -> Void
+    let nextLessonAction: (() -> Void)?
     let cancelDownloadAction: () -> Void
 }
 
@@ -177,7 +178,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         }.store(in: &cancellables)
 
         nextLessonButton.gesture().sink { [weak self] _ in
-            self?.model?.nextLessonAction()
+            self?.model?.nextLessonAction?()
         }.store(in: &cancellables)
 
         presenter.downloadState.sink { [weak self] state in
@@ -212,10 +213,12 @@ extension DetailsView: Updateable {
         thumbnailPlayerView.isHidden = false
         thumbnailPlayerView.update(with: .init(thumbnailURL: model.thumbnailURL))
 
-        videoPlayerController.videoURL = URL(string: model.videoURL)
+        videoPlayerController.resource = .init(id: model.id, videoURL: model.videoUrl)
         moveChildToParent(videoPlayerController)
         
         titleView.text = model.title
         descriptionView.text = model.description
+
+        nextLessonButton.isHidden = model.nextLessonAction == nil
     }
 }

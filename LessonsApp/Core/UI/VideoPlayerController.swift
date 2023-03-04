@@ -7,6 +7,11 @@
 
 import AVKit
 
+public struct VideoResource: Equatable {
+    let id: Int
+    let videoURL: String
+}
+
 public final class VideoPlayerController: AVPlayerViewController {
 
     private var currentTime: CMTime = .zero
@@ -14,9 +19,9 @@ public final class VideoPlayerController: AVPlayerViewController {
 
     private(set) var isLoaded: Bool
     
-    var videoURL: URL? {
+    var resource: VideoResource? {
         didSet {
-            guard let videoURL = videoURL else { return }
+            guard let videoURL = resource?.url else { return }
             removeTimeObserver()
             let player = AVPlayer(url: videoURL)
             self.player = player
@@ -88,5 +93,11 @@ extension AVPlayerViewController {
         if self.responds(to: selectorToForceFullScreenMode) {
             self.perform(selectorToForceFullScreenMode, with: true, with: nil)
         }
+    }
+}
+
+private extension VideoResource {
+    var url: URL? {
+        FileManager.default.loadVideo(with: id) ?? URL(string: videoURL)
     }
 }

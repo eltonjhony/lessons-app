@@ -14,5 +14,4 @@ public final class LessonEntity: Object {
     @Persisted var desc: String
     @Persisted var thumbnail: String
     @Persisted var videoUrl: String
-    @Persisted var localVideoUrl: String?
 }

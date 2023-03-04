@@ -1,5 +1,5 @@
 //
-//  ListingView.swift
+//  LessonsView.swift
 //  LessonsApp
 //
 //  Created by Elton Jhony on 27/02/23.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ListingView<Presenter: ListingPresentable>: View {
+struct LessonsView<Presenter: LessonsPresentable>: View {
     @ObservedObject var presenter: Presenter
 
     var body: some View {
@@ -22,7 +22,7 @@ struct ListingView<Presenter: ListingPresentable>: View {
         if case let .success(lessons) = presenter.data {
             ScrollView {
                 ForEach(lessons, id: \.id) { lesson in
-                    ListingItem(item: lesson)
+                    LessonsItemView(item: lesson)
                         .onTapGesture {
                             presenter.detailsTapped(id: lesson.id)
                         }

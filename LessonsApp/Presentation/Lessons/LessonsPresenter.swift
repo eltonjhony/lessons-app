@@ -1,5 +1,5 @@
 //
-//  ListingPresenter.swift
+//  LessonsPresenter.swift
 //  LessonsApp
 //
 //  Created by Elton Jhony on 27/02/23.
@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-public protocol ListingPresentable: SUIPresentable {
+public protocol LessonsPresentable: SUIPresentable {
     var data: LessonsData { get }
     func detailsTapped(id: Int)
 }
 
-public final class ListingPresenter: ListingPresentable {
+public final class LessonsPresenter: LessonsPresentable {
 
     public var navigationBar: SUIPresentableNavigationBar? = .init(
         title: "Lessons",

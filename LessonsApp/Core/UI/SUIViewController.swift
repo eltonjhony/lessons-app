@@ -72,7 +72,7 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter.rightBarButtons?.sink(receiveValue: { [weak self] buttons in
+        presenter.rightBarButtons.sink(receiveValue: { [weak self] buttons in
             self?.setRightBarButtons(buttons)
         }).store(in: &cancellables)
 
@@ -104,9 +104,7 @@ private extension SUIViewController {
     }
 
     func setRightBarButtons(_ buttons: [ButtonModel]) {
-        if navigationItem.rightBarButtonItem == nil {
-            navigationItem.rightBarButtonItem = UIBarButtonItem()
-        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
         buttons.forEach { buttonModel in
             let customView = UIButton()
             if let icon = buttonModel.icon {
@@ -116,7 +114,6 @@ private extension SUIViewController {
             customView.setTitleColor(.link, for: .normal)
             customView.tintColor = .link
             navigationItem.rightBarButtonItem?.customView = customView
-            navigationItem.rightBarButtonItem?.isEnabled = buttonModel.enabled
             navigationItem.rightBarButtonItem?.customView?.gesture().sink(receiveValue: { _ in
                 buttonModel.action()
             }).store(in: &cancellables)

@@ -1,5 +1,5 @@
 //
-//  ListingItem.swift
+//  LessonsItemView.swift
 //  LessonsApp
 //
 //  Created by Elton Jhony on 03/03/23.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct ListingItem: View {
+struct LessonsItemView: View {
     let item: LessonModel
 
     var body: some View {
