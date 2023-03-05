@@ -30,14 +30,15 @@ public struct ServicesFactory: ServicesFactoryProtocol {
     public init(applicationConfigurable: ApplicationConfigurable) {
         self.applicationConfigurable = applicationConfigurable
 
-        let webService = WebService(
-            configuration: applicationConfigurable.webServiceConfigurable
-        )
+        let webService = applicationConfigurable.webServiceConfigurable
         let apiEndpointResources = applicationConfigurable.endpointResources
 
         let dbConfigurable = applicationConfigurable.dbConfigurable
 
-        networkServices = NetworkServicesModule(webService: webService, apiEndpointResource: apiEndpointResources)
+        networkServices = NetworkServicesModule(
+            webService: webService,
+            apiEndpointResource: apiEndpointResources
+        )
         persistenceServices = PersistenceServicesModule(dbConfigurable: dbConfigurable)
     }
 }

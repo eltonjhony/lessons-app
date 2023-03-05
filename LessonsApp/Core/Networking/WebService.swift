@@ -150,7 +150,7 @@ extension HTTPURLResponse {
     }
 }
 
-private extension Data {
+extension Data {
     var dictionary: [String: String]? {
         guard let json = try? JSONSerialization.jsonObject(with: self, options: []) as? [String: Any] else {
             return nil

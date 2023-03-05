@@ -27,7 +27,9 @@ struct LessonsView<Presenter: LessonsPresentable>: View {
                             presenter.detailsTapped(id: lesson.id)
                         }
                 }
-            }.padding(.top)
+            }
+            .padding(.top)
+            .accessibilityIdentifier(Accessibility.Views.lessonsIdentifier)
         }
     }
 

@@ -26,6 +26,7 @@ final class ThumbnailPlayerView: SUIView {
 
     private lazy var thumbnailPlayerContainerView: LoadingImageView = {
         let view = LoadingImageView(frame: .zero)
+        view.accessibilityIdentifier = Accessibility.Images.thumbnailImageIdentifier
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

@@ -23,6 +23,7 @@ struct LessonsItemView: View {
             Image(systemName: "chevron.right")
         }
         .padding()
+        .accessibility(identifier: "\(Accessibility.Views.lessonCellIdentifier)\(item.id)")
     }
 }
 

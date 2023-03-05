@@ -46,12 +46,14 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     private lazy var thumbnailPlayerView: ThumbnailPlayerView = {
         let view = ThumbnailPlayerView(imagePresenter: imagePresenter)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = Accessibility.Views.thumbPlayerViewIdentifier
         return view
     }()
 
     private lazy var titleView: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = Accessibility.Labels.lessonTitleIdentifier
         view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -62,6 +64,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     private lazy var descriptionView: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = Accessibility.Labels.lessonDescriptionIdentifier
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.textAlignment = .left
         view.lineBreakMode = .byWordWrapping
@@ -72,6 +75,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
     private lazy var nextLessonButton: UIButton = {
         let view = UIButton(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = Accessibility.Buttons.nextLessonButtonIdentifier
         view.setTitle("Next lesson", for: .normal)
         view.setTitleColor(.link, for: .normal)
         view.setImage(UIImage(systemName: "chevron.right"), for: .normal)
@@ -103,6 +107,7 @@ final class DetailsView<Presenter: DetailsPresentable>: SUIView {
         self.presenter = presenter
         self.imagePresenter = imagePresenter
         super.init(frame: .zero)
+        self.accessibilityIdentifier = Accessibility.Views.lessonDetailsViewIdentifier
         setup()
     }
 

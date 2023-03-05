@@ -15,8 +15,7 @@ final class AppSetup: NSObject {
     private let mainApplicationRouterModule: MainRouterModule
     private let applicationRouter: MainRoutable
 
-    public override init() {
-        let applicationConfiguration = AppConfiguration()
+    public init(applicationConfiguration: ApplicationConfigurable = AppConfiguration()) {
         let servicesFactory = ServicesFactory(applicationConfigurable: applicationConfiguration)
         serviceRegistry = ServiceRegistry(servicesFactory: servicesFactory)
 
