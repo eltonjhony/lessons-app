@@ -25,7 +25,7 @@ public struct SUIPresentableNavigationBar: Equatable {
 
 public protocol SUIPresentable: ObservableObject {
     var navigationBar: SUIPresentableNavigationBar? { get }
-    var rightBarButtons: PassthroughSubject<[ButtonModel], Never> { get }
+    var rightBarButtons: AnyPublisher<[ButtonModel], Never>? { get }
 
     func onAppear()
 }
@@ -36,8 +36,8 @@ extension SUIPresentable {
         get { return .init() } set {}
     }
 
-    public var rightBarButtons: PassthroughSubject<[ButtonModel], Never> {
-        get { return .init() } set {}
+    public var rightBarButtons: AnyPublisher<[ButtonModel], Never>? {
+        get { return nil } set {}
     }
 
 }

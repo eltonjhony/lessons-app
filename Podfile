@@ -10,6 +10,7 @@ target 'LessonsApp' do
   target 'LessonsAppTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Nimble'
   end
 
   target 'LessonsAppUITests' do

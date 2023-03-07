@@ -14,7 +14,10 @@ public protocol DetailsPresentable: SUIPresentable {
 }
 
 public final class DetailsPresenter: DetailsPresentable {
-    public var rightBarButtons: PassthroughSubject<[ButtonModel], Never> = .init()
+    public var rightBarButtons: AnyPublisher<[ButtonModel], Never>? {
+        rightBarButtonsSubject.eraseToAnyPublisher()
+    }
+    private var rightBarButtonsSubject: PassthroughSubject<[ButtonModel], Never> = .init()
 
     public var data: AnyPublisher<DetailsViewModel?, Never> {
         dataSubject.eraseToAnyPublisher()
@@ -53,7 +56,7 @@ public final class DetailsPresenter: DetailsPresentable {
         let downloadAction = { [weak self] in
             self?.downloadInteractor.download(videoURL: model.videoUrl, id: model.id)
         }
-        rightBarButtons.send([.init(
+        rightBarButtonsSubject.send([.init(
             title: "Download",
             icon: "icloud.and.arrow.down",
             action: downloadAction

@@ -72,7 +72,7 @@ public class SUIViewController<Presenter>: UIViewController where Presenter: SUI
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        presenter.rightBarButtons.sink(receiveValue: { [weak self] buttons in
+        presenter.rightBarButtons?.sink(receiveValue: { [weak self] buttons in
             self?.setRightBarButtons(buttons)
         }).store(in: &cancellables)
 
